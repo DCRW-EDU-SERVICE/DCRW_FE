@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 관리(관리자)</title>
+    <link rel="stylesheet" href="../../css/manager.css">
+    <script>
+        function loadSidebar(){
+            fetch('../manager/manager-sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementsByClassName('sidebar')[0].innerHTML=data;
+                })
+        }
+        window.onload = loadSidebar;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- 사이드바 -->
+        <aside class="sidebar">
+        </aside>
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!--회원 통계-->
+            <section class="user-result">
+                <h2>통계</h2>
+                <div class="result-content">
+                    <h3>현재 가입자 수</h3>
+                    <span id="user-cnt">nan</span>명
+                </div>
+
+            </section>
+            <!-- 회원 목록 -->
+            <section class="user-list">
+                <h2>회원 목록</h2>
+                <div class="search-form">
+                    <input type="text" id="user-id" name="user-id" placeholder="회원 이름 또는 아이디" required>
+                    <button type="button" id="search-user">검색</button>
+                </div>
+                <div class="btn-container">
+                    <button class="withdraw-btn">회원 탈퇴</button>
+                </div>
+                <div id="user-list">
+                    <table class="user-table">
+                        <thead class="user-col">
+                            <th class="header" id="check">선택</th>
+                            <th class="header">역할</th>
+                            <th class="header">이름</th>
+                            <th class="header">아이디</th>
+                            <th class="header">생년월일</th>
+                            <th class="header">주소</th>
+                            <th class="header">가입일자</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>${user.role}</td>
+                                <td>${user.name}</td>
+                                <td>${user.user_id}</td>
+                                <td>${user.birthdate}</td>
+                                <td>${user.address}</td>
+                                <td>${user.joindate}</td>
+                            </tr>
+                        </tbody>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

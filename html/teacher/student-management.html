@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/student-management.css">
+    <title>학생 관리</title>
+    <script>
+        function loadSidebar(){
+            fetch('../teacher/teacher-sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementsByClassName('sidebar')[0].innerHTML=data;
+                })
+        }
+        window.onload = loadSidebar;
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 사이드바 -->
+        <aside class="sidebar">
+        </aside>
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 학생 목록 -->
+            <section class="student-list">
+                <h2>학생 목록</h2>
+                <div id="student-list">
+                    <div>
+
+                    </div>
+                </div>
+            </section>
+            <!-- 학생 등록 -->
+            <section class="student-register">
+                <h2>학생 등록</h2>
+                <form id="student-form">
+                    <label for="student-id">아이디로 검색</label>
+                    <div id="search-form">
+                        <input type="text" id="student-id" name="student-id" placeholder="아이디 입력" required>
+                        <button type="button" id="search-student">검색</button>
+                    </div>
+                    <div id="search-result"></div>
+                    <br>
+                    <hr>
+                    <br>
+                    <label for="course">교육과정 선택</label>
+                    <select id="course" name="course">
+                        <option value="한국어 교육 서비스">한국어 교육 서비스</option>
+                        <option value="자녀생활 서비스">자녀생활 서비스</option>
+                        <option value="부모교육 서비스">부모교육 서비스</option>
+                    </select>
+                    <div class="form-buttons">
+                        <button type="submit" class="save-btn">학생 저장</button>
+                        <button type="button" class="cancel-btn">취소</button>
+                    </div>
+                </form>
+            </section>
+            
+        </main>
+    </div>
+    <script src="../../js/student-management.js"></script>
+</body>
+
+</html>

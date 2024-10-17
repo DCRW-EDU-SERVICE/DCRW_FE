@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/contents.css">
+    <title>강의 컨텐츠 관리</title>
+    <script>
+        function loadSidebar(){
+            fetch('../teacher/teacher-sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementsByClassName('sidebar')[0].innerHTML=data;
+                })
+        }
+        window.onload = loadSidebar;
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 사이드바 -->
+        <aside class="sidebar">
+        </aside>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <!-- 강의 목록 -->
+            <section class="lecture-list">
+                <h2>강의 목록</h2>
+                <div class="lecture-item">
+                    <div class="name">
+                        <span class="service-name">자녀생활 서비스</span>
+                        <span class="lecture-name">강아영 학생의 강의</span>
+                    </div>
+                    <div class="more-dropdown">
+                        <button class="more-btn">⋮</button>
+                        <div class="dropdown hidden">
+                            <button class="edit-btn">수정</button>
+                        </div>
+                    </div> 
+                </div>
+                <div class="lecture-item">
+                    <div class="name">
+                        <span class="service-name">한국어 교육 서비스</span>
+                        <span class="lecture-name">이은비 학생의 강의</span>
+                    </div>
+                    <div class="more-dropdown">
+                        <button class="more-btn">⋮</button>
+                        <div class="dropdown hidden">
+                            <button class="edit-btn">수정</button>
+                        </div>
+                    </div> 
+                </div>
+                <div class="lecture-item">
+                    <div class="name">
+                        <span class="service-name">부모교육 서비스</span>
+                        <span class="lecture-name">응우엔 레이 학생의 강의</span>
+                    </div>
+                    <div class="more-dropdown">
+                        <button class="more-btn">⋮</button>
+                        <div class="dropdown hidden">
+                            <button class="edit-btn">수정</button>
+                        </div>
+                    </div> 
+                </div>
+            </section>
+            <section class="lecture-contents">
+                <h2>컨텐츠 관리</h2>
+                <div class="lecture">
+                    <label for="lecture-title">강의 제목</label>
+                    <input type="text" id="lecture-title" name="lecture-title" required>
+                </div>
+                <div class="accordion" id="accordion-container">
+                    <!-- 주차별 아코디언 항목들이 여기에 추가됩니다 -->
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../../js/contents.js"></script>
+</body>
+
+</html>
