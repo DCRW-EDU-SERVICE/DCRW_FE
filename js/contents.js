@@ -59,13 +59,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const saveBtn = document.createElement('button');
         saveBtn.textContent = '저장';
-        const editBtn = document.createElement('button');
-        editBtn.textContent = '수정';
+        //const editBtn = document.createElement('button');
+        //editBtn.textContent = '수정';
         const deleteBtn = document.createElement('button');
         deleteBtn.textContent = '삭제';
 
         saveBtn.classList.add('save-btn');
-        editBtn.classList.add('edit-btn');
+        //editBtn.classList.add('edit-btn');
         deleteBtn.classList.add('delete-btn');
 
         const viewerDiv = document.createElement('div');
@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         // 기타 버튼 이벤트 처리
+        /*
         editBtn.addEventListener('click', () => {
             const storageKey = `${selectedLecture}-week${i}-file`;
             const savedFile = localStorage.getItem(storageKey);
@@ -129,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert('저장된 파일이 없습니다.');
             }
         });
+        */
 
         deleteBtn.addEventListener('click', () => {
             const storageKey = `${selectedLecture}-week${i}-file`;
@@ -140,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // 아코디언 항목에 구성 요소 추가
         buttonContainer.appendChild(saveBtn);
-        buttonContainer.appendChild(editBtn);
+        //buttonContainer.appendChild(editBtn);
         buttonContainer.appendChild(deleteBtn);
 
         contentDiv.appendChild(buttonContainer);

@@ -1,15 +1,15 @@
-<!--학생 강의 콘텐츠 조회-->
+<!--학생 GPT 퀴즈-->
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/course_contents.css">
-    <title>강의 컨텐츠 조회</title>
+    <link rel="stylesheet" href="../../css/teacher_contents.css">
+    <title>AI 퀴즈</title>
     <script>
         function loadSidebar(){
-            fetch('../teacher/teacher-sidebar.html')
+            fetch('../student/student-sidebar.html')
                 .then(response => response.text())
                 .then(data => {
                     document.getElementsByClassName('sidebar')[0].innerHTML=data;
@@ -28,19 +28,14 @@
         
         <!-- 메인 컨텐츠 -->
         <main class="main-content">
-            <div class="top">
-                <h2 id="lecture-title"></h2>
-                <div id="progress-rate"></div>
-            </div>
             <section class="lecture-contents">
-                <h2>강의 컨텐츠</h2>
-                <div class="accordion" id="accordion-container">
-                    <!-- 주차별 아코디언 항목들이 여기에 추가됩니다 -->
-                </div>
+                <h2>AI 퀴즈</h2>
+                <div class="question-box"></div>
+                <div class="answer-box"></div>
             </section>
         </main>
     </div>
-    <script src="../../js/course_contents.js"></script>
+    <script src="../../js/student_contents.js"></script>
 </body>
 
 </html>

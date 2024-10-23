@@ -23,35 +23,48 @@
         </aside>
         <!-- 메인 컨텐츠 -->
         <main class="main-content">
-            <!--회원 통계-->
-            <section class="user-result">
-                <h2>통계</h2>
-                <div class="result-content">
-                    <h3>현재 가입자 수</h3>
-                    <span id="user-cnt">nan</span>명
-                </div>
-
-            </section>
+            <div class="top">
+                <!--회원 통계-->
+                <section class="user-result">
+                    <h2>통계</h2>
+                    <div class="result-content">
+                        <h3>현재 가입자 수</h3>
+                        <span id="user-cnt">nan</span>명
+                    </div>
+                </section>
+            </div>
             <!-- 회원 목록 -->
             <section class="user-list">
                 <h2>회원 목록</h2>
                 <div class="search-form">
-                    <input type="text" id="user-id" name="user-id" placeholder="회원 이름 또는 아이디" required>
-                    <button type="button" id="search-user">검색</button>
+                    <div class="search">
+                        <input type="text" id="user-id" name="user-id" placeholder="회원 이름 또는 아이디" required>
+                        <button type="button" id="search-user">검색</button>
+                    </div>
+                    <form action="#">
+                        <label for="sort">정렬</label>
+                        <select id="sort" name="sort">
+                            <option value="최근 가입">최근 가입 순</option>
+                            <option value="가나다">가나다 순</option>
+                        </select>
+                    </form>
                 </div>
+                
                 <div class="btn-container">
+                    <button class="code-btn">교사코드 발급</button>
                     <button class="withdraw-btn">회원 탈퇴</button>
                 </div>
                 <div id="user-list">
                     <table class="user-table">
                         <thead class="user-col">
-                            <th class="header" id="check">선택</th>
-                            <th class="header">역할</th>
+                            <th class="header" id="check"><input type="checkbox"></th>
+                            <th class="header">구분</th>
                             <th class="header">이름</th>
                             <th class="header">아이디</th>
                             <th class="header">생년월일</th>
                             <th class="header">주소</th>
                             <th class="header">가입일자</th>
+                            <th class="header">교사코드</th>
                         </thead>
                         <tbody>
                             <tr>
@@ -62,11 +75,13 @@
                                 <td>${user.birthdate}</td>
                                 <td>${user.address}</td>
                                 <td>${user.joindate}</td>
+                                <td>${user.teacherCode}</td>
                             </tr>
                         </tbody>
                 </div>
             </section>
         </main>
     </div>
+    <script src="../../js/manager.js"></script>
 </body>
 </html>

@@ -146,8 +146,13 @@ header {
     flex-grow: 1;
     padding: 20px;
 }
-
-.user-list, .user-result {
+.top{
+    display: flex;
+}
+.code-create{
+    margin-left: 15px;
+}
+.user-list, .user-result{
     padding: 15px;
     border: 1px solid #333;
     border-radius: 20px;
@@ -156,7 +161,14 @@ header {
     width: 100%;
     box-sizing: border-box;
 }
-
+.search-form{
+    display: flex;
+    justify-content: space-between;
+}
+/* 
+.search{
+}
+*/
 .search-form input[type="text"]{
     padding: 10px;
     border-radius: 20px 5px 5px 20px;
@@ -172,6 +184,12 @@ header {
     cursor: pointer;
     width: 50px; /* 고정된 너비 설정 */
     text-align: center;
+}
+.search-form select{
+    width: 120px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 /* 회원 목록 스타일 */
 .user-list {
@@ -202,13 +220,23 @@ header {
 .user-table #check{
     width: 45%;
 }
-
-/*탈퇴 버튼*/
 .btn-container {
     display: flex;
     justify-content:flex-end;
     width: 100%;
 }
+/*교사코드 발급 버튼*/
+.code-btn{
+    width: 120px;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 5px;
+    background-color: #4caf50;
+}
+/*탈퇴 버튼*/
 .withdraw-btn {
     width: 100px;
     padding: 10px;
@@ -218,4 +246,37 @@ header {
     cursor: pointer;
     margin: 5px 0;
     background-color: #ec1c53;
+}
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 2px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 20px;
+}
+
+.popup-content {
+    text-align: center;
+}
+
+.popup-content p {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.popup-content button {
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.popup-content button:hover {
+    background-color: #45a049;
 }

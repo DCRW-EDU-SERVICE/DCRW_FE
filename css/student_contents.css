@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+}
+
+.container {
+    width: 97.5vw;
+    height: 94vh;
+    display: flex;
+    padding: 2.5vh 1vw;
+}
+
+/* 사이드바 스타일 */
+.sidebar {
+    width: 18vw;
+    height: 95vh;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    border-radius: 30px 0 0 30px;
+}
+
+.profile {
+    width: 60%;
+    text-align: center;
+    margin: 10%;
+    padding: 10%;
+    background-color: #ddd;
+    border-radius: 30px;
+}
+
+.profile-image {
+    width: 8vw;
+    height: 8.3vw;
+    border-radius: 50%;
+    margin-bottom: 2vh;
+    background-color: #ffffff;
+}
+
+.username {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.location {
+    color: gray;
+}
+
+.nav{
+    width: 60%;
+    margin:10%; 
+    padding-left:10%;   
+}
+
+.nav ul {
+    width: 100%;
+    list-style: none;
+    padding:0;
+    
+}
+.nav ul.basic-menu li{
+    margin-bottom: 1.5vh;
+    
+}
+.nav ul.basic-menu hr {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+
+}
+
+.sub-menu{
+    margin-left: 10%;
+    margin-top: 10%;
+    visibility: hidden;
+}
+.sub-menu li a {
+    margin-bottom: 1vh;
+}
+
+.nav ul li a {
+
+    text-decoration: none;
+    color: #333;
+    
+}
+
+/* 메인 콘텐츠 스타일 */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+/* 상단 레이아웃을 한 줄로 배치 */
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5vh 2vw;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* 강의 제목 스타일 */
+#lecture-title {
+    width: 30vh;
+    border-radius: 20px;
+    text-align: center;
+    background-color: #ffd700;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* 진행률 스타일 */
+#progress-rate {
+    background-color: #007bff;
+    color: white;
+    padding: 0.8vh 1.5vw;
+    border-radius: 20px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 100px;
+}
+
+.lecture-contents {
+    padding: 15px;
+    border: 1px solid #333;
+    border-radius: 20px;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+/* 아코디언 스타일 */
+.accordion {
+    margin-top: 20px;
+}
+
+.accordion-item {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.accordion-header {
+    background-color: #f1f1f1;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.accordion-body {
+    display: none;
+    padding: 20px;
+    background-color: #fafafa;
+}
+
+.accordion-body.show {
+    display: block;
+}
+.lecture-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+.lecture-content video,
+.lecture-content a {
+    display: block;
+    width: 70%;
+    min-width: 400px;
+    margin-top: 10px;
+}

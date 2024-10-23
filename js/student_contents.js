@@ -49,6 +49,36 @@ document.addEventListener('DOMContentLoaded', function () {
     fetchProgressRate();
     */
 
+    // 파일 형식에 맞는 뷰어를 동적으로 생성하는 함수
+    function createViewer(fileExtension, fileName) {
+        const contentDiv = document.createElement('div');
+        contentDiv.classList.add('lecture-content');
+        
+        if (fileExtension === 'mp4') {
+            // 비디오 요소 생성
+            const video = document.createElement('video');
+            video.setAttribute('controls', true);
+            video.innerHTML = `<source src="${fileName}" type="video/mp4">Your browser does not support the video tag.`;
+            contentDiv.appendChild(video);
+        } else if (fileExtension === 'pdf') {
+            // PDF 뷰어 (object를 사용한 방식)
+            const pdfViewer = document.createElement('object');
+            pdfViewer.setAttribute('data', fileName);
+            pdfViewer.setAttribute('width', '90%');
+            pdfViewer.setAttribute('height', '300px');
+            pdfViewer.setAttribute('type', 'application/pdf');
+            contentDiv.appendChild(pdfViewer);
+        } else {
+            // 기타 파일 형식에 대한 다운로드 링크
+            const downloadLink = document.createElement('a');
+            downloadLink.setAttribute('href', fileName);
+            downloadLink.textContent = `Download ${fileName}`;
+            contentDiv.appendChild(downloadLink);
+        }
+
+        return contentDiv;
+    }
+
     // 아코디언 동적 생성
     for (let i = 1; i <= weekCount; i++) {
         const accordionItem = document.createElement('div');
@@ -62,59 +92,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const bodyDiv = document.createElement('div');
         bodyDiv.classList.add('accordion-body');
 
-        // 강의 콘텐츠 div 생성
-        const contentDiv = document.createElement('div');
-        contentDiv.classList.add('lecture-content');
+        // 파일 이름 및 확장자
+        const fileName = `lecture${i}`; // 예시: lecture1.mp4, lecture1.pdf, etc.
+        const fileExtension = 'mp4'; // 파일 확장자를 실제로 가져오거나 지정 (예시: mp4, pdf)
 
-        // 비디오 요소 생성
-        const video = document.createElement('video');
-        video.setAttribute('controls', true);
-        video.innerHTML = `
-            <source src="lecture${i}.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        `;
-        contentDiv.appendChild(video); // 강의 콘텐츠 div에 비디오 추가
-
-        /*
-        //같은 폴더에 주차별 파일(lecture1.pdf, ...)이 존재하면 나타나도록 구현함
-        // PDF 뷰어 (object를 사용한 방식)
-        const pdfViewer = document.createElement('object');
-        pdfViewer.setAttribute('data', `lecture${i}.pdf`);
-        pdfViewer.setAttribute('width', '90%');
-        pdfViewer.setAttribute('height', '300px');
-        pdfViewer.setAttribute('type', 'application/pdf');
-        
-        contentDiv.appendChild(pdfViewer); // 강의 콘텐츠 div에 PDF 뷰어 추가
-        */
-
-        // "강의 완료" 버튼을 감쌀 div 생성
-        const buttonContainer = document.createElement('div');
-        buttonContainer.classList.add('button-container'); // 필요한 스타일을 적용하기 위해 클래스 추가
-
-        // "강의 완료" 버튼 생성
-        const finishButton = document.createElement('button');
-        finishButton.classList.add('finish-btn');
-        finishButton.textContent = '다운로드';
-
-        // 강의 완료 버튼 클릭 이벤트
-        let isCompleted = false; // 주차별 강의 완료 여부를 저장
-        finishButton.addEventListener('click', function () {
-            if (!isCompleted) { // 이미 완료된 강의는 중복 카운트하지 않음
-                completedWeeks++; // 완료된 주차 수 1 증가
-                updateProgressRate(); // 진도율 업데이트
-                alert(`${i}주차 강의가 완료되었습니다!`);
-                isCompleted = true; // 완료 상태로 변경
-                finishButton.disabled = true; // 버튼 비활성화 (중복 클릭 방지)
-            } else {
-                alert(`${i}주차 강의는 이미 완료되었습니다.`);
-            }
-        });
-
-        // 버튼을 buttonContainer 안에 추가
-        buttonContainer.appendChild(finishButton);
-
-        // 버튼을 강의 콘텐츠 div에 추가
-        contentDiv.appendChild(finishButton);
+        // 강의 콘텐츠 div 생성 및 파일 뷰어 추가
+        const contentDiv = createViewer(fileExtension, `${fileName}.${fileExtension}`);
+        bodyDiv.appendChild(contentDiv);
 
         // 콘텐츠 div를 아코디언 body에 추가
         bodyDiv.appendChild(contentDiv);
@@ -139,16 +123,15 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
 function click_role_menu() {
     var li = document.getElementsByClassName("active")[0];
     var ul = document.getElementsByClassName("sub-menu")[0];
-    console.log(li, ul);
-    console.log(getComputedStyle(ul).visibility);
     if (getComputedStyle(ul).visibility == "hidden") {
-      ul.style.visibility = "visible";
-      li.style.cssText = "font-weight: bolder;";
+        ul.style.visibility = "visible";
+        li.style.cssText = "font-weight: bolder;";
     } else {
-      ul.style.visibility = "hidden";
-      li.style.cssText = "font-weight: normal;";
+        ul.style.visibility = "hidden";
+        li.style.cssText = "font-weight: normal;";
     }
-  }
+}

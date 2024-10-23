@@ -64,14 +64,43 @@ document.addEventListener('DOMContentLoaded', function () {
         const contentDiv = document.createElement('div');
         contentDiv.classList.add('lecture-content');
 
-        // 비디오 요소 생성
-        const video = document.createElement('video');
-        video.setAttribute('controls', true);
-        video.innerHTML = `
-            <source src="lecture${i}.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        `;
-        contentDiv.appendChild(video); // 강의 콘텐츠 div에 비디오 추가
+        // 파일 형식에 따른 뷰어 생성 로직 추가
+        // 예시: DB에서 파일 정보를 가져와 파일 형식에 맞게 처리
+        const fileType = 'video/mp4'; // 예시로 파일 유형 설정, 실제로는 DB에서 가져옴
+        const fileName = `lecture${i}`; // 주차별 파일 이름 예시
+
+        if (fileType.includes('video')) {
+            // 비디오 요소 생성
+            const video = document.createElement('video');
+            video.setAttribute('controls', true);
+            video.innerHTML = `
+                <source src="${fileName}.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            `;
+            contentDiv.appendChild(video); // 강의 콘텐츠 div에 비디오 추가
+        } else if (fileType.includes('pdf')) {
+            // PDF 뷰어 (object를 사용한 방식)
+            const pdfViewer = document.createElement('object');
+            pdfViewer.setAttribute('data', `${fileName}.pdf`);
+            pdfViewer.setAttribute('width', '90%');
+            pdfViewer.setAttribute('height', '300px');
+            pdfViewer.setAttribute('type', 'application/pdf');
+            contentDiv.appendChild(pdfViewer); // 강의 콘텐츠 div에 PDF 뷰어 추가
+        } else if (fileType.includes('image')) {
+            // 이미지 뷰어
+            const img = document.createElement('img');
+            img.setAttribute('src', `${fileName}.jpg`);
+            img.setAttribute('alt', 'Lecture Image');
+            img.setAttribute('width', '90%');
+            contentDiv.appendChild(img); // 강의 콘텐츠 div에 이미지 추가
+        } else {
+            // 기타 파일 다운로드 링크
+            const downloadLink = document.createElement('a');
+            downloadLink.setAttribute('href', `${fileName}`);
+            downloadLink.setAttribute('download', `${fileName}`);
+            downloadLink.textContent = 'Download Content';
+            contentDiv.appendChild(downloadLink); // 강의 콘텐츠 div에 다운로드 링크 추가
+        }
 
         /*
         //같은 폴더에 주차별 파일(lecture1.pdf, ...)이 존재하면 나타나도록 구현함
@@ -86,8 +115,8 @@ document.addEventListener('DOMContentLoaded', function () {
         */
 
         // "강의 완료" 버튼을 감쌀 div 생성
-        const buttonContainer = document.createElement('div');
-        buttonContainer.classList.add('button-container'); // 필요한 스타일을 적용하기 위해 클래스 추가
+        //const buttonContainer = document.createElement('div');
+        //buttonContainer.classList.add('button-container'); // 필요한 스타일을 적용하기 위해 클래스 추가
 
         // "강의 완료" 버튼 생성
         const finishButton = document.createElement('button');
@@ -107,9 +136,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert(`${i}주차 강의는 이미 완료되었습니다.`);
             }
         });
-
-        // 버튼을 buttonContainer 안에 추가
-        buttonContainer.appendChild(finishButton);
 
         // 버튼을 강의 콘텐츠 div에 추가
         contentDiv.appendChild(finishButton);
@@ -137,16 +163,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-function click_role_menu() {
-    var li = document.getElementsByClassName("active")[0];
-    var ul = document.getElementsByClassName("sub-menu")[0];
-    console.log(li, ul);
-    console.log(getComputedStyle(ul).visibility);
-    if (getComputedStyle(ul).visibility == "hidden") {
-      ul.style.visibility = "visible";
-      li.style.cssText = "font-weight: bolder;";
-    } else {
-      ul.style.visibility = "hidden";
-      li.style.cssText = "font-weight: normal;";
-    }
-  }
