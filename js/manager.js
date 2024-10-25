@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const userList = [
         { role: '학생', name: '홍길동', user_id: 'hong123', birthdate: '1995-01-01', address: '서울시 강남구', joindate: '2023-10-01', teacherCode: '' },
-        { role: '교사', name: '김철수', user_id: 'kim456', birthdate: '1980-05-12', address: '부산시 해운대구', joindate: '2023-08-15', teacherCode: '' },
-        { role: '교사', name: '이영희', user_id: 'lee789', birthdate: '1990-02-20', address: '대전시 중구', joindate: '2023-07-20', teacherCode: '' }
+        { role: '학생', name: '김철수', user_id: 'kim456', birthdate: '1980-05-12', address: '부산시 해운대구', joindate: '2023-08-15', teacherCode: '' },
+        { role: '학생', name: '이영희', user_id: 'lee789', birthdate: '1990-02-20', address: '대전시 중구', joindate: '2023-07-20', teacherCode: '' } // 교사코드 예시
     ];
 
     // 회원 목록 테이블 업데이트 함수
@@ -37,61 +37,29 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // 검색 기능 구현
-    document.getElementById('search-user').addEventListener('click', function () {
-        const searchValue = document.getElementById('user-id').value.toLowerCase();
-        const filteredUsers = userList.filter(user => 
-            user.name.toLowerCase().includes(searchValue) || user.user_id.toLowerCase().includes(searchValue)
-        );
-        updateUserTable(filteredUsers);
-    });
-
-    // 정렬 기능 구현
-    document.getElementById('sort').addEventListener('change', function () {
-        const sortValue = this.value;
-        let sortedUsers;
-
-        if (sortValue === '최근 가입') {
-            sortedUsers = [...userList].sort((a, b) => new Date(b.joindate) - new Date(a.joindate));
-        } else if (sortValue === '가나다') {
-            sortedUsers = [...userList].sort((a, b) => a.name.localeCompare(b.name));
-        }
-
-        updateUserTable(sortedUsers);
-    });
-
     // 교사 코드 발급 기능
     document.querySelector('.code-btn').addEventListener('click', function () {
         const selectedUsers = getSelectedUsers();
         if (selectedUsers.length > 0) {
-            let isValid = true;
+            const usersWithTeacherCode = selectedUsers.filter(user => user.teacherCode !== '');
+            const usersWithoutTeacherCode = selectedUsers.filter(user => user.teacherCode === '');
 
-            // 모든 선택된 회원이 '교사'인지 확인
-            selectedUsers.forEach(user => {
-                if (user.role !== '교사') {
-                    isValid = false;
-                }
-            });
-
-            if (isValid) {
-                // 기존 교사 코드가 있는지 확인
-                const usersWithExistingCodes = selectedUsers.filter(user => user.teacherCode !== '');
-                if (usersWithExistingCodes.length > 0) {
-                    const namesWithExistingCodes = usersWithExistingCodes.map(user => user.name).join(', ');
-                    showPopup(`${namesWithExistingCodes}의 교사코드는 이미 발급되어 있습니다.`);
-                } else {
-                    // 교사 코드 발급 및 팝업 표시
-                    issueTeacherCodes(selectedUsers);
-                }
-            } else {
-                showPopup('교사코드는 교사에게만 발급 가능합니다.');
+            if (usersWithTeacherCode.length > 0) {
+                const namesWithTeacherCode = usersWithTeacherCode.map(user => user.name).join(', ');
+                showPopup(`${namesWithTeacherCode}의 교사코드는 이미 발급되어 있습니다.`, () => {
+                    if (usersWithoutTeacherCode.length > 0) {
+                        issueTeacherCodes(usersWithoutTeacherCode);
+                    }
+                });
+            } else if (usersWithoutTeacherCode.length > 0) {
+                issueTeacherCodes(usersWithoutTeacherCode);
             }
         } else {
             showPopup('교사코드를 발급할 회원을 선택해주세요.');
         }
     });
 
-    // 교사 코드 발급 및 팝업 표시 함수
+    // 교사 코드 발급 및 역할 변경 함수
     function issueTeacherCodes(selectedUsers) {
         let index = 0;
 
@@ -100,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const user = selectedUsers[index];
                 const teacherCode = generateTeacherCode();
                 user.teacherCode = teacherCode;  // 교사 코드 저장
+                user.role = '교사';  // 역할을 '교사'로 변경
                 showPopup(`회원 ${user.name}에게 발급된 교사 코드: ${teacherCode}`, () => {
                     updateUserTable(userList);  // 업데이트된 회원 목록 표시
                     index++; // 다음 교사로 이동
@@ -141,21 +110,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 회원 탈퇴 기능
-    document.querySelector('.withdraw-btn').addEventListener('click', function () {
-        const selectedUsers = getSelectedUsers();
-        if (selectedUsers.length > 0) {
-            const confirmation = confirm(`정말로 ${selectedUsers.map(user => user.name).join(', ')} 회원을 탈퇴시키겠습니까?`);
-            if (confirmation) {
-                selectedUsers.forEach(user => removeUser(user.user_id));
-                updateUserTable(userList);
-                alert(`${selectedUsers.map(user => user.name).join(', ')} 회원이 목록에서 삭제되었습니다.`);
-            }
-        } else {
-            alert('탈퇴할 회원을 선택해주세요.');
-        }
-    });
-
     // 선택된 회원 가져오기
     function getSelectedUsers() {
         const checkboxes = document.querySelectorAll('.user-checkbox');
@@ -168,20 +122,5 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         return selectedUsers;
-    }
-
-    // 회원 목록에서 삭제하는 함수
-    function removeUser(userId) {
-        const index = userList.findIndex(user => user.user_id === userId);
-        if (index !== -1) {
-            userList.splice(index, 1);
-        }
-    }
-
-    // 모든 회원 선택 해제 함수
-    function deselectAllUsers() {
-        document.querySelectorAll('.user-checkbox').forEach(checkbox => {
-            checkbox.checked = false;
-        });
     }
 });

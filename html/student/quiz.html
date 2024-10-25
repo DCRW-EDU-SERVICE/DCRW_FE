@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/teacher_contents.css">
+    <link rel="stylesheet" href="../../css/student_quiz.css">
     <title>AI 퀴즈</title>
     <script>
         function loadSidebar(){
@@ -28,14 +28,48 @@
         
         <!-- 메인 컨텐츠 -->
         <main class="main-content">
-            <section class="lecture-contents">
+            <section class="quiz-contents">
                 <h2>AI 퀴즈</h2>
-                <div class="question-box"></div>
-                <div class="answer-box"></div>
+                <nav class="quiz-theme">
+                    <ul class="tab-nav">
+                        <li class="tab-link current" data-tab="tab1">
+                         <a href="#tab1">한글</a>
+                      </li>
+                      <li class="tab-link" data-tab="tab2">
+                         <a href="#tab2">문화</a>
+                      </li>
+                      <li class="tab-link" data-tab="tab3">
+                         <a href="#tab3">기후</a>
+                      </li>
+                    </ul>
+                    <div class="question-box current">
+                        
+                    </div>
+                    <div class="answer-box">
+                    
+                    </div>
+                </nav>
             </section>
         </main>
     </div>
-    <script src="../../js/student_contents.js"></script>
+    <!-- 채점 결과 팝업 -->
+    <div id="result-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <p id="result-message"></p>
+            <div class="btn-container">
+                <button class="reanswer-btn" id="reanswer-btn">다시 풀어보기</button>
+                <button class="next-btn">다음으로</button>
+            </div>
+            
+            <div class="rate-container">
+                <p>방금 푼 퀴즈를 평가해주세요</p>
+                <button onclick="rateQuiz('like')" class="rate-btn like-btn" onclick="rateQuiz('like')">좋아요 👍</button>
+                <button onclick="rateQuiz('dislike')" class="rate-btn dislike-btn" onclick="rateQuiz('dislike')">싫어요 👎</button>
+            </div>
+        </div>
+    </div>
+    <script src="../../js/student_quiz.js"></script>
 </body>
 
 </html>
