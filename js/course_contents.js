@@ -26,6 +26,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // 페이지 로드 시 초기 진도율 설정
     updateProgressRate();
 
+    // '일지출력' 버튼 클릭 시 현재 진도율을 alert로 표시
+    document.getElementById('daily-report').addEventListener('click', function () {
+        // 진도율 값을 progress-rate 요소에서 가져옴
+        const progressRate = document.getElementById('progress-rate').innerText;
+        
+        // alert로 진도율 표시 -> 추후 학습일지 출력 기능으로 재구현 필요
+        alert(`현재 ${progressRate}`);
+    });
+
+
     /*
     // DB에서 진도율 데이터를 가져오는 함수
     function fetchProgressRate() {
