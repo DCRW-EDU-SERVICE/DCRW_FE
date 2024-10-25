@@ -1,0 +1,324 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+   }
+
+.container {
+    width:97.5vw;
+    height:94vh;
+    display: flex;
+    padding-top:2.5vh;
+    padding-bottom:2.5vh;
+    padding-left:1vw;
+    padding-right:1vw
+}
+
+/* 사이드바 스타일 */
+.sidebar {
+    width: 18vw;
+    height: 95vh;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    border-radius: 30px 0 0 30px;
+}
+
+.profile {
+    width: 60%;
+    text-align: center;
+    margin: 10%;
+    padding: 10%;
+    background-color: #ddd;
+    border-radius: 30px;
+}
+
+.profile-image {
+    width: 8vw;
+    height: 8.3vw;
+    border-radius: 50%;
+    margin-bottom: 2vh;
+    background-color: #ffffff;
+}
+
+.username {
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+
+.location {
+    color: gray;
+}
+
+.nav{
+    width: 60%;
+    margin:10%; 
+    padding-left:10%;   
+}
+
+.nav ul {
+    width: 100%;
+    list-style: none;
+    padding:0;
+    
+}
+.nav ul.basic-menu li{
+    margin-bottom: 1.5vh;
+    
+}
+.nav ul.basic-menu hr {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+
+}
+
+.sub-menu{
+    margin-left: 10%;
+    margin-top: 10%;
+    visibility: hidden;
+}
+.sub-menu li a {
+    margin-bottom: 1vh;
+}
+
+.nav ul li a {
+
+    text-decoration: none;
+    color: #333;
+    
+}
+.main-container{
+    width: 80vw;
+    height: 95vh;
+    border-radius: 0px 30px 30px 0px;
+}
+/*헤더:로고*/
+header {
+    width: 100%;
+    height:10%;
+    border-radius: 0px 30px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;  
+    background-color: #ffffff;
+}
+.logo-image{
+    width: 11vw;
+    height:7.5vh;
+
+}
+/*메인:메뉴바*/
+.main-nav{
+    width: 100%;
+    height: 6%;
+    display: flex;
+    justify-content: start;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background-color: #ffffff;
+}
+.main-nav ul {
+    width: 50%;
+    height:100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;  
+    list-style-type: none;
+    
+}
+.main-nav ul li a {
+    text-decoration: none;
+    color:#333
+}
+
+/* 메인 컨텐츠 스타일 */
+.main-content {
+    width: 80%;
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.lecture-list, 
+.lecture-create {
+    padding: 15px;
+    border: 1px solid #333;
+    border-radius: 20px;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+.service-name{
+    font-size: 12px;
+    padding: 0;
+    color: #333;
+    display: block;
+}
+.lecture-item {
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.lecture-item:hover{
+    background-color: #ffeb3b;
+}
+.name{
+    display: block;
+}
+.more-dropdown{
+    margin-left: auto;
+    display: flex; /* 플렉스 박스 사용 */
+    justify-content: flex-end; /* 버튼들을 오른쪽으로 정렬 */
+}
+.more-btn {
+    border:none;
+    display: block;
+    background: none;
+    font-size: 20px;
+    cursor: pointer;
+    width: 20px;
+    text-align: right;
+}
+.hidden {
+    display: none;
+}
+.more-dropdown:hover .dropdown {
+    display: inline-block;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+    width: 97%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#add-week {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* Dropdown styles */
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.edit-btn {
+    padding: 10px;
+    cursor: pointer;
+    width: 100%;
+    background: none;
+    border: none;
+}
+
+/* 강의 생성 섹션 스타일 */
+.week-plan {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.week-plan label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.week-plan textarea {
+    width: 95%;
+    height: 80px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    resize: vertical;
+}
+
+.plan-buttons {
+    display: flex;
+    gap: 10px;
+}
+.plan-container {
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+.save-plan-btn,
+.edit-plan-btn,
+.delete-plan-btn {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+}
+
+.save-plan-btn {
+    background-color: #4caf50;
+    color: white;
+}
+
+.edit-plan-btn {
+    background-color: #ff9800;
+    color: white;
+}
+
+.delete-plan-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.form-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.save-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background-color: #ccc;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

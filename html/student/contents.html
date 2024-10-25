@@ -1,0 +1,46 @@
+<!--학생 강의 콘텐츠 학습-->
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/student_contents.css">
+    <title>강의 컨텐츠 학습</title>
+    <script>
+        function loadSidebar(){
+            fetch('../student/student-sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementsByClassName('sidebar')[0].innerHTML=data;
+                })
+        }
+        window.onload = loadSidebar;
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 사이드바 -->
+        <aside class="sidebar">
+            
+        </aside>
+        
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <div class="top">
+                <h2 id="lecture-title"></h2>
+                <div id="progress-rate"></div>
+            </div>
+            <section class="lecture-contents">
+                <h2>강의 컨텐츠</h2>
+                <div class="accordion" id="accordion-container">
+                    <!-- 주차별 아코디언 항목들이 여기에 추가됩니다 -->
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../../js/student_contents.js"></script>
+</body>
+
+</html>

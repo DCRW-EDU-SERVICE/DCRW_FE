@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 관리(관리자)</title>
+    <link rel="stylesheet" href="../../css/manager.css">
+    <script>
+        function loadSidebar(){
+            fetch('../manager/manager-sidebar.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementsByClassName('sidebar')[0].innerHTML=data;
+                })
+        }
+        window.onload = loadSidebar;
+    </script>
+</head>
+<body>
+    <div class="container">
+        <!-- 사이드바 -->
+        <aside class="sidebar">
+        </aside>
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <div class="top">
+                <!--회원 통계-->
+                <section class="user-result">
+                    <h2>통계</h2>
+                    <div class="result-content">
+                        <h3>현재 가입자 수</h3>
+                        <span id="user-cnt">nan</span>명
+                    </div>
+                </section>
+            </div>
+            <!-- 회원 목록 -->
+            <section class="user-list">
+                <h2>회원 목록</h2>
+                <div class="search-form">
+                    <div class="search">
+                        <input type="text" id="user-id" name="user-id" placeholder="회원 이름 또는 아이디" required>
+                        <button type="button" id="search-user">검색</button>
+                    </div>
+                    <form action="#">
+                        <label for="sort">정렬</label>
+                        <select id="sort" name="sort">
+                            <option value="최근 가입">최근 가입 순</option>
+                            <option value="가나다">가나다 순</option>
+                        </select>
+                    </form>
+                </div>
+                
+                <div class="btn-container">
+                    <button class="code-btn">교사코드 발급</button>
+                    <button class="withdraw-btn">회원 탈퇴</button>
+                </div>
+                <div id="user-list">
+                    <table class="user-table">
+                        <thead class="user-col">
+                            <th class="header" id="check"><input type="checkbox"></th>
+                            <th class="header">구분</th>
+                            <th class="header">이름</th>
+                            <th class="header">아이디</th>
+                            <th class="header">생년월일</th>
+                            <th class="header">주소</th>
+                            <th class="header">가입일자</th>
+                            <th class="header">교사코드</th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>${user.role}</td>
+                                <td>${user.name}</td>
+                                <td>${user.user_id}</td>
+                                <td>${user.birthdate}</td>
+                                <td>${user.address}</td>
+                                <td>${user.joindate}</td>
+                                <td>${user.teacherCode}</td>
+                            </tr>
+                        </tbody>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="../../js/manager.js"></script>
+</body>
+</html>
