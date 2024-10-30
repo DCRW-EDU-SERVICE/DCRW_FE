@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필관리</title>
+    <link rel="stylesheet" href="../../css/profile.css">
+</head>
+<body>  
+        <div class="logo">프로필 관리</div> 
+            <section class="profile-form">
+                <section class="profile-show">
+                    <img src="../images/book_puppy.png" class="profile-image">
+                    <div class="profile-show-info">
+                        <p class="username">이은비</p>
+                        <p class="userrole">학생</p>
+                        <p class="service">한국어 교육 서비스</p>
+                    </div>
+                </section>
+                <form action="">
+                    <div class="int-area">
+                        <div class="int-label-area">
+                            <label for="name">이름</label>
+                        </div>    
+                        <input type="text" name="name" id="name" autocomplete="off" required>
+                    </div>
+                    <div class="int-area">
+                        <div class="int-label-area">
+                            <label for="adress">주소</label>
+                        </div>
+                        <div class="int-label-area">
+                        <input type="text" class="form-control mb-2" id="zipp_code_id" name="zipp_code" maxlength="10" placeholder="우편번호" style="width:70%; margin-right: 2vh;" autocomplete="off" required>
+                        <button id="zipp_btn" class="zip_code_btn" onclick="execDaumPostcode()">주소 찾기</button><br></div>
+                        <input type="text" name="user_add1" id="UserAdd1" maxlength="40" placeholder="기본 주소" style="margin-top:15px;" required>
+                        <div class="int-label-area" id="zip-warning-div" style="display: inline-block; margin: 0px;">
+                            <div class="zip-warning">상세주소를 입력하세요</div>
+                            <input type="text" class="form-control" name="user_add2" id="UserAdd2" maxlength="40" placeholder="상세 주소를 입력하세요" autocomplete="off" required>
+                        </div>
+                        
+                    </div>
+                    <div class="int-area">
+                        <div class="int-label-area">
+                            <label for="birth">생년월일</label>
+                        </div>    
+                        <input type="date" class="birth" name="birth" id="birth" min="1900-01-01" autocomplete="off" required>
+                    </div>
+                    <div class="btn-area">
+                        <button id="btn" onclick="history.back()" class="cancel-btn">취소</button>
+                        <button id="btn" type="submit" class="submit-btn">저장</button>
+                    </div>
+                </form>
+            </section>
+            <div class="mountain-1"></div>
+            <div class="mountain-2"></div>
+<script type="text/javascript" src="../../js/profile.js"></script> 
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<!-- CDN 방식 사용 -->
+</body>
+</html>
