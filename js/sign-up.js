@@ -1,16 +1,121 @@
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("signupForm");
+
+  // 날짜 제한 (현재 날짜 이후 불가)
+  const nowUtc = Date.now();
+  const timeOffset = new Date().getTimezoneOffset() * 60000;
+  const today = new Date(nowUtc - timeOffset).toISOString().split("T")[0];
+  document.getElementById("birth").setAttribute("max", today);
+
+  form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    // 폼 데이터 가져오기
+    const userId = document.getElementById("id").value;
+    const userIdWarning = document.getElementById("id_warning");
+    const password = document.getElementById("pw").value;
+    const checkPassword = document.getElementById("checkpw").value;
+    const passwordWarning = document.getElementById("pw_warning");
+    const checkPasswordWarning = document.getElementById("check-pw-warning");
+    const name = document.getElementById("name").value;
+    const zippCode = document.getElementById("zipp_code_id").value;
+    const address1 = document.getElementById("UserAdd1").value;
+    const address2 = document.getElementById("UserAdd2").value;
+    const address2Warning = document.getElementById("zip_warning");
+    const address = `${address1} ${address2} (${zippCode})`;
+
+    const birth = document.getElementById("birth").value;
+    const joinDate = new Date().toISOString().split("T")[0];
+
+    // 유효성 검사
+    const userIdPattern = /^[a-z0-9]{4,20}$/;
+    const passwordPattern =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,16}$/;
+    const namePattern = /^[가-힣a-zA-Z0-9]{2,10}$/;
+
+    if (!userIdPattern.test(userId)) {
+      //alert("아이디는 영문 소문자와 숫자 4~20자리여야 합니다.");
+      userIdWarning.style.visibility = "visible";
+      return;
+    }
+
+    if (!passwordPattern.test(password)) {
+      //alert("비밀번호는 8~16자리, 영문 대소문자, 숫자, 특수문자 1개 이상을 포함해야 합니다.");
+      passwordWarning.style.visibility = "visible";
+      return;
+    }
+
+    if (password !== checkPassword) {
+      //alert("비밀번호가 일치하지 않습니다.");
+      checkPasswordWarning.style.visibility = "visible";
+      return;
+    }
+
+    if (!namePattern.test(name)) {
+      alert("이름은 특수문자를 포함하지 않은 2~10자리여야 합니다.");
+      return;
+    }
+
+    if (!zippCode) {
+      //alert("주소를 입력해주세요.");
+      address2Warning.style.visibility = "visible";
+      return;
+    }
+
+    // CSRF 토큰 가져오기
+    const csrfToken = document
+      .querySelector('meta[name="csrf-token"]')
+      .getAttribute("content");
+
+    try {
+      // 회원가입 API 요청
+      const response = await fetch("http://13.209.48.39/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": csrfToken, // CSRF 토큰을 헤더에 추가
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          userId: userId,
+          password: password,
+          name: name,
+          address: address,
+          birthdate: birth, // yyyy-MM-dd 형식으로 전달
+          //teacherCode: teacherCode,
+          //joinDate: joinDate, // yyyy-MM-dd 형식으로 전달
+        }),
+      });
+      if (!response.ok) {
+        throw new Error(
+          `서버 에러: ${response.status} - ${response.statusText}`
+        );
+      }
+
+      const data = await response.json();
+      if (data.message === "가입 성공") {
+        alert("회원가입 성공!");
+        window.location.href = "./Profile.html"; // 회원가입 후 프로필 페이지로 이동
+      } else {
+        alert("회원가입 실패: " + data.message);
+      }
+    } catch (error) {
+      console.error("회원가입 요청 중 오류:", error);
+      alert(`회원가입 요청에 실패했습니다: ${error.message}`);
+    }
+  });
+});
+
+// 다음 주소 API 연동
 function execDaumPostcode() {
   new daum.Postcode({
     oncomplete: function (data) {
-      // 팝업을 통한 검색 결과 항목 클릭 시 실행
-      var addr = ""; // 주소_결과값이 없을 경우 공백
-      var extraAddr = ""; // 참고항목
+      let addr = "";
+      let extraAddr = "";
 
-      //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
       if (data.userSelectedType === "R") {
-        // 도로명 주소를 선택
         addr = data.roadAddress;
       } else {
-        // 지번 주소를 선택
         addr = data.jibunAddress;
       }
 
@@ -25,23 +130,11 @@ function execDaumPostcode() {
         if (extraAddr !== "") {
           extraAddr = " (" + extraAddr + ")";
         }
-      } else {
-        document.getElementById("UserAdd1").value = "";
       }
 
-      // 선택된 우편번호와 주소 정보를 input 박스에 넣는다.
       document.getElementById("zipp_code_id").value = data.zonecode;
-      document.getElementById("UserAdd1").value = addr;
-      document.getElementById("UserAdd1").value += extraAddr;
-      document.getElementById("UserAdd2").focus(); // 우편번호 + 주소 입력이 완료되었음으로 상세주소로 포커스 이동
+      document.getElementById("UserAdd1").value = addr + extraAddr;
+      document.getElementById("UserAdd2").focus();
     },
   }).open();
 }
-
-//날짜제한(현재 날짜 이후 불가)
-var now_utc = Date.now(); // 지금 날짜를 밀리초로
-// getTimezoneOffset()은 현재 시간과의 차이를 분 단위로 반환
-var timeOff = new Date().getTimezoneOffset() * 60000; // 분단위를 밀리초로 변환
-// new Date(now_utc-timeOff).toISOString()은 '2024-10-01T18:09:38.134Z'를 반환
-var today = new Date(now_utc - timeOff).toISOString().split("T")[0];
-document.getElementById("birth").setAttribute("max", today);
