@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const data = await response.json();
       if (data.message === "Login successful") {
         alert("로그인 성공!");
-        window.location.href = "../../html/account/profile.html";
+        window.location.href = "../../html/main/main.html";
       } else {
         alert("로그인 실패: " + data.message);
       }
