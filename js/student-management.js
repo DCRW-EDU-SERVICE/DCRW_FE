@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const usernameElement = document.querySelector(".username");
+    if (usernameElement) {
+        const username = localStorage.getItem("username");
+        if (username) {
+            usernameElement.textContent = `${username} 선생님`;
+        }
+    }
+    
     // 세션 유효성 검사 함수
     function checkSession() {
         return localStorage.getItem("isLoggedIn") === "true";
