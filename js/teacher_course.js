@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let weekCount = 1;
+    let weekCount = 1; // 주차 번호
     const lectures = {}; // 강의 데이터를 저장할 객체
     let isLectureSelected = false; // 강의가 선택되었는지 여부를 추적
 
@@ -34,6 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        // 새로운 주차 요소 추가
         const newWeekDiv = createWeekPlanElement("", weekCount);
         weekContainer.appendChild(newWeekDiv);
         weekCount++;
@@ -90,7 +91,21 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     
         deleteButton.addEventListener('click', () => {
-            weekContainer.removeChild(newWeekDiv); // 주차 삭제
+            // 주차를 삭제하고, 뒤에 있는 주차들의 번호를 하나씩 당긴다.
+            const weekDiv = newWeekDiv;
+            weekContainer.removeChild(weekDiv); // 삭제된 주차 아코디언 제거
+            
+            // 삭제된 주차 이후, 주차 번호를 재조정
+            const allWeeks = weekContainer.querySelectorAll('.week-plan');
+            allWeeks.forEach((weekDiv, index) => {
+                const newWeekNumber = index + 1; // 주차 번호 재조정
+                const weekLabel = weekDiv.querySelector('label');
+                weekLabel.textContent = `${newWeekNumber}주차`;
+                weekDiv.setAttribute('data-week', `week-${newWeekNumber}`);
+            });
+
+            // weekCount 조정 (뒤의 주차들이 삭제되었으므로)
+            weekCount--;
         });
     
         planButtonsDiv.appendChild(saveButton);
@@ -161,10 +176,13 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
             // 강의가 선택되었음을 표시
-            isLectureSelected = true;
+            isLectureSelected = true; // 강의 선택 상태를 true로 설정
+            alert("강의가 선택되었습니다."); // 강의 선택 메시지 표시
         });
     });
 });
+
+// 메뉴 클릭 함수
 function click_role_menu() {
     var li = document.getElementsByClassName("active")[0];
     var ul = document.getElementsByClassName("sub-menu")[0];
@@ -177,4 +195,4 @@ function click_role_menu() {
       ul.style.visibility = "hidden";
       li.style.cssText = "font-weight: normal;";
     }
-  }
+}
