@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 서버에서 주차 수 및 완료된 주차 수 불러오는 함수
     function fetchLectureData() {
         // 서버에서 강의 주차 및 진도율 데이터를 가져오기 위한 fetch 요청
-        fetch(`/api/lecture-data?lecture=${lectureTitle}`)
+        fetch(`http://13.209.48.39/teacher/course/lecture-data?lecture=${lectureTitle}`)
             .then(response => response.json())
             .then(data => {
                 weekCount = data.weekCount; // 서버에서 받아온 주차 수
@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.error('Error fetching lecture data:', error);
                 progressRateElement.textContent = '강의 데이터를 불러올 수 없습니다.';
             });
+        console.log();
     }
 
     // 주차 수에 따라 아코디언 동적 생성
