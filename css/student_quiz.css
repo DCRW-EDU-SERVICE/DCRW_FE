@@ -148,6 +148,8 @@ body {
     border: 1px solid #ccc;
     border-bottom: none;
     padding: 20px 0;
+    border-top: 5px solid #007bff;
+    margin-top: 10px;
 }
 
 /* 답변 상자 스타일 */

@@ -116,9 +116,29 @@ body {
     font-size: 1.5rem;
     font-weight: bold;
 }
-
+.top-detail{
+    display: inline-block;
+}
+/* 일지출력 버튼 */
+#daily-report{
+    display: inline-block;
+    border: none;
+    background-color: #f44336;
+    color: white;
+    padding: 1.2vh 1.8vw;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: medium;
+    text-align: center;
+    min-width: 100px;
+    cursor: pointer;
+}
+#daily-report:hover{
+    background-color: #d44336;
+}
 /* 진행률 스타일 */
 #progress-rate {
+    display: inline-block;
     background-color: #007bff;
     color: white;
     padding: 0.8vh 1.5vw;
