@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
+    /*
     // CSRF 토큰 추출: 메타 태그에서 추출하고 없을 시 localStorage에서 가져오기
     let csrfToken = document.querySelector('meta[name="csrf-token"]');
     csrfToken = csrfToken ? csrfToken.getAttribute("content") : localStorage.getItem("csrfToken");
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }else {
         localStorage.setItem("csrfToken", csrfToken); // 추출된 토큰 저장
     }
-
+        */
     const students = JSON.parse(localStorage.getItem('students')) || [];
     const maxStudents = 5;
     let selectedStudentDiv = null;
@@ -44,14 +45,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedCourse = document.getElementById('course').value;
         const courseId = getCourseId(selectedCourse);
 
-        fetch('http://13.209.48.39/teacher/student-management', {
+        fetch('http://localhost:8080/teacher/student-management', {
             method: 'POST',
             credentials: 'include', // 로그인된 세션 정보를 포함
             headers: { 
-                'Content-Type': 'application/json',
-                'X-CSRF-Token': csrfToken // CSRF 토큰 포함
+                'Content-Type': 'application/json'
+                //'X-CSRF-Token': csrfToken // CSRF 토큰 포함
             },
-            body: JSON.stringify({ studentId})
+            body: JSON.stringify({ studentId, courseId})
         })
         .then(response => {
             if (response.status === 403) {
@@ -63,13 +64,16 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
-            if (data.status === "success") {
-                displaySearchResults([{
+            console.log("API 응답 데이터:", data); // 응답 데이터 구조 확인
+            if (data.status === "OK" && data.data) {
+                // 배열 형태로 전달
+                const students = [{
                     id: data.data.studentId,
                     name: data.data.studentName
-                }]);
+                }];
+                displaySearchResults(students);
             } else {
-                document.getElementById('search-result').textContent = data.message || '검색 결과가 없습니다.';
+                displaySearchResults([]); // 빈 배열을 전달하여 "검색 결과가 없습니다" 메시지 표시
             }
         })
         .catch(error => {
@@ -80,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 검색 결과를 화면에 표시
     function displaySearchResults(students) {
+        console.log("Displaying search results:", students); // 디버깅용
         const searchResultDiv = document.getElementById('search-result');
         searchResultDiv.innerHTML = '';
 
@@ -138,12 +143,12 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        fetch('http://13.209.48.39/teacher/student-management/register', {
+        fetch('http://localhost:8080/teacher/student-management/register', {
             method: 'POST',
             credentials: 'include', // 로그인된 세션을 유지하기 위해 포함
             headers: { 
-                'Content-Type': 'application/json',
-                'X-CSRF-Token': csrfToken // CSRF 토큰 포함
+                'Content-Type': 'application/json'
+                //'X-CSRF-Token': csrfToken // CSRF 토큰 포함
             },
             body: JSON.stringify({ studentId: selectedStudent.id, courseId })
         })

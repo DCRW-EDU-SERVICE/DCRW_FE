@@ -141,3 +141,16 @@ input[type='date']:valid::before {
   margin: 0;
   color: #003676;
 }
+
+.id-warning{
+  visibility: hidden;
+}
+.pw-warning{
+  visibility: hidden;
+}
+.check-pw-warning{
+  visibility: hidden;
+}
+.zip-warning{
+  visibility: hidden;
+}

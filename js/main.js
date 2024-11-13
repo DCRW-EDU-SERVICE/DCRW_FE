@@ -23,7 +23,7 @@ function getCookie(name) {
   
   document.addEventListener("DOMContentLoaded", function () {
     const studentManagementLink = document.querySelector("a[href='../teacher/student-management.html']");
-  
+    
     // CSRF 토큰 체크
     const csrfToken = checkCsrfToken();
   
@@ -77,27 +77,4 @@ function getCookie(name) {
       nextEl: ".swiper-button-next",
     },
   });
-  
-  // 로그인 요청 함수 (기존 코드와 동일)
-  async function sendRequest() {
-    const userId = document.getElementById("id").value;
-    const password = document.getElementById("pw").value;
-  
-    const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
-    const csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute("content") : null;
-  
-    if (!csrfToken) {
-      throw new Error("CSRF 토큰이 존재하지 않습니다. 서버 설정을 확인하세요.");
-    }
-  
-    return await fetch('http://13.209.48.39/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-XSRF-TOKEN': csrfToken
-      },
-      credentials: 'include',
-      body: JSON.stringify({ username: userId, password: password })
-    });
-  }
   

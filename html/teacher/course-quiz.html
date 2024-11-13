@@ -1,15 +1,15 @@
-<!--학생 GPT 퀴즈-->
+<!--교사 퀴즈 생성 페이지-->
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/student_quiz.css">
+    <link rel="stylesheet" href="../../css/teacher_quiz.css">
     <title>AI 퀴즈</title>
     <script>
         function loadSidebar(){
-            fetch('../student/student-sidebar.html')
+            fetch('../teacher/teacher-sidebar.html')
                 .then(response => response.text())
                 .then(data => {
                     document.getElementsByClassName('sidebar')[0].innerHTML=data;
@@ -58,7 +58,7 @@
             </div>
         </div>
     </div>
-    <script src="../../js/student_quiz.js"></script>
+    <script src="../../js/teacher_quiz.js"></script>
 </body>
 
 </html>

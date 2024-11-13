@@ -194,17 +194,17 @@ function click_role_menu() {
 // 서버로부터 강의 목록을 불러오는 함수
 async function sendRequest() {
     const csrfToken = document.cookie.split('; ').find(row=>row.startsWith('XSRF-TOKEN='))?.split('=')[1];
-    const response = await fetch('http://13.209.48.39/teacher/course', {
+    const response = await fetch('http://localhost:8080/teacher/course', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'X-XSRF-TOKEN' : csrfToken
+        //'X-XSRF-TOKEN' : csrfToken
       },
       credentials: 'include'
     });
   
     if (!response.ok) {
-      alert("강의 목록을 불러오지 못했습니다. 다시 시도해주세요.");
+      alert("서버에서 강의 목록을 불러오지 못했습니다. 다시 시도해주세요.");
       return null;
     }
   
@@ -263,6 +263,23 @@ async function sendRequest() {
   
         // 편집 버튼 클릭 이벤트 추가
         editButton.addEventListener('click', () => loadLectureDetails(course));
+
+        // 강의 항목 클릭 이벤트 리스너 추가
+        lectureItem.addEventListener('click', (event) => {
+          if (event.target.classList.contains('edit-btn') || event.target.classList.contains('more-btn') || event.target.closest('.dropdown')) {
+              return;
+          }
+
+          const lectureName = lectureItem.querySelector('.lecture-name').textContent;
+          const serviceName = lectureItem.querySelector('.service-name').textContent;
+
+          // contents.html로 강의 정보를 쿼리 파라미터로 전달
+          const params = new URLSearchParams({
+              lecture: lectureName,
+              service: serviceName
+          });
+          window.location.href = `../course/contents.html?${params.toString()}`;
+        });
       });
     } else {
       alert("강의 목록을 불러오지 못했습니다.");

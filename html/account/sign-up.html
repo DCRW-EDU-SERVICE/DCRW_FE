@@ -4,73 +4,81 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
     <title>회원가입</title>
     <link rel="stylesheet" href="../../css/sign-up.css">
+    
 </head>
 <body>
     <img src="../images/parent_puppy.png" class="deco1">
-    
-        <section class="signup-form">
-            <img src="../images/logo.png" class="logo">
-            <form action="">
-                <div class="int-area">
-                    <div class="int-label-area">
-                        <label for="id">아이디</label>
-                        <div class="id-warning"> 사용할 수 없는 아이디 입니다</div>
-                    </div>
-                    <input type="text" name="id" id="id" autocomplete="off" required>
+    <section class="signup-form">
+        <img src="../images/logo.png" class="logo">
+        <form id="signupForm">
+            <!-- 아이디 입력 -->
+            <div class="int-area">
+                <div class="int-label-area">
+                    <label for="id">아이디</label>
+                    <div class="id-warning" id="id_warning"> 영문 소문자와 숫자를 조합한 4~20자리</div>
                 </div>
-                <div class="int-area">
-                    <div class="int-label-area">
-                        <label for="pw">비밀번호</label>
-                        <div class="pw-warning">특수문자, 대문자를 필수적으로 사용하세요</div>
-                    </div>    
-                    <input type="password" name="pw" id="pw" autocomplete="off" required>
-                </div>
-                <div class="int-area">
-                    <div class="int-label-area">
-                        <label for="checkpw">비밀번호 확인</label>
-                        <div class="check-pw-warning">비밀번호가 일치하지 않습니다</div>
-                    </div>   
-                    <input type="text" name="check-pw" id="checkpw" autocomplete="off" required>
-                </div>
-                <div class="int-area">
-                    <div class="int-label-area">
-                        <label for="name">이름</label>
-                    </div>    
-                    <input type="text" name="name" id="name" autocomplete="off" required>
-                </div>
-                <div class="int-area">
-                    <div class="int-label-area">
-                        <label for="adress">주소</label>
-                    </div>
-                    <div class="int-label-area">
-                    <input type="text" class="form-control mb-2" id="zipp_code_id" name="zipp_code" maxlength="10" placeholder="우편번호" style="width:70%; margin-right: 10%;" autocomplete="off" required>
-                    <button id="zipp_btn" class="zip_code_btn" onclick="execDaumPostcode()" style="width:20%;">주소 찾기</button><br></div>
-                    <input type="text" name="user_add1" id="UserAdd1" maxlength="40" placeholder="기본 주소" style="margin-top:15px;" required>
-                    <div class="int-label-area" id="zip-warning-div" style="display: inline-block; margin: 0px; float: right;">
-                        <div class="zip-warning">상세주소를 입력하세요</div>
-                    </div>
-                    <input type="text" class="form-control" name="user_add2" id="UserAdd2" maxlength="40" placeholder="상세 주소를 입력하세요" autocomplete="off" required>
-                </div>
-                <div class="int-area">
-                    <div class="int-label-area">
-                        <label for="birth">생년월일</label>
-                    </div>    
-                    <input type="date" class="birth" name="birth" id="birth" min="1900-01-01" autocomplete="off" required>
-                </div>
-                <div class="btn-area">
-                    <button id="btn" type="submit">회원가입</button>
-                </div>
-            </form>
-            <div class="caption">
-                <div>이미 회원이신가요?</div>
-                <a href="./Login.html">로그인</a>
-                <a href="./Profile.html">프로필관리</a>
+                <input type="text" name="id" id="id" autocomplete="off" required>
             </div>
-        </section>
-<script type="text/javascript" src="../../js/sign-up.js"></script> 
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<!-- CDN 방식 사용 -->
+            <!-- 비밀번호 입력 -->
+            <div class="int-area">
+                <div class="int-label-area">
+                    <label for="pw">비밀번호</label>
+                    <div class="pw-warning" id="pw_warning"> 영문 대소문자, 숫자, 특수문자를 조합한 8~16자리</div>
+                </div>    
+                <input type="password" name="pw" id="pw" autocomplete="off" required>
+            </div>
+            <!-- 비밀번호 확인 -->
+            <div class="int-area">
+                <div class="int-label-area">
+                    <label for="checkpw">비밀번호 확인</label>
+                    <div class="check-pw-warning" id="check-pw-warning">비밀번호가 일치하지 않습니다</div>
+                </div>   
+                <input type="password" name="check-pw" id="checkpw" autocomplete="off" required>
+            </div>
+            <!-- 이름 -->
+            <div class="int-area">
+                <div class="int-label-area">
+                    <label for="name">이름</label>
+                </div>    
+                <input type="text" name="name" id="name" autocomplete="off" required>
+            </div>
+            <!-- 주소 -->
+            <div class="int-area">
+                <div class="int-label-area">
+                    <label for="adress">주소</label>
+                </div>
+                <div class="int-label-area">
+                    <input type="text" class="form-control mb-2" id="zipp_code_id" name="zipp_code" maxlength="10" placeholder="우편번호" style="width:70%; margin-right: 10%;" autocomplete="off" required>
+                    <button type="button" id="zipp_btn" class="zip_code_btn" onclick="execDaumPostcode()" style="width:20%;">주소 찾기</button><br>
+                </div>
+                <input type="text" name="user_add1" id="UserAdd1" maxlength="40" placeholder="기본 주소" style="margin-top:15px;" required>
+                <div class="int-label-area" id="zip-warning-div" style="display: inline-block; margin: 0px; float: right;">
+                    <div class="zip-warning" id="zip_warning">상세주소를 입력하세요</div>
+                </div>
+                <input type="text" class="form-control" name="user_add2" id="UserAdd2" maxlength="40" placeholder="상세 주소를 입력하세요" autocomplete="off" required>
+            </div>
+            <!-- 생년월일 -->
+            <div class="int-area">
+                <div class="int-label-area">
+                    <label for="birth">생년월일</label>
+                </div>    
+                <input type="date" class="birth" name="birth" id="birth" min="1900-01-01" autocomplete="off" required>
+            </div>
+            <!-- 회원가입 버튼 -->
+            <div class="btn-area">
+                <button id="btn" type="submit">회원가입</button>
+            </div>
+        </form>
+        <div class="caption">
+            <div>이미 회원이신가요?</div>
+            <a href="./Login.html">로그인</a>
+            <a href="./Profile.html">프로필관리</a>
+        </div>
+    </section>
+    <script type="text/javascript" src="../../js/sign-up.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> <!-- 주소 검색 CDN -->
 </body>
 </html>
