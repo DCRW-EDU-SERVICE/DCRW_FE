@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-CSRF-Token": csrfToken, // CSRF 토큰을 헤더에 추가
+          //"X-CSRF-Token": csrfToken, // CSRF 토큰을 헤더에 추가
         },
         body: JSON.stringify({ username: userId, password: password }),
         credentials: "include", // 세션 쿠키 포함 설정
