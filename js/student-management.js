@@ -108,49 +108,69 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 학생 선택 함수 - 선택된 학생과 UI 상태를 업데이트
     function selectStudent(student, studentDiv) {
         if (selectedStudentDiv) {
             selectedStudentDiv.style.border = 'none';
         }
 
+        // 선택된 학생 정보 저장
         selectedStudent = student;
         selectedStudentDiv = studentDiv;
+
+        // 선택된 학생 표시
         studentDiv.style.border = '2px solid #327cd3';
         studentDiv.style.borderRadius = '5px';
 
         document.getElementById('student-id').value = student.id;
+        console.log("선택된 학생 ID:", student.id);
     }
 
-    // 학생 저장 버튼 클릭 시 처리
     document.getElementById('student-form').addEventListener('submit', function (e) {
         e.preventDefault();
-
+    
         if (!selectedStudent) {
             alert('학생을 선택해주세요.');
             return;
         }
-
+    
         const selectedCourse = document.getElementById('course').value;
         const courseId = getCourseId(selectedCourse);
-
+    
+        if (!courseId) {
+            alert('올바른 강의를 선택해주세요.');
+            return;
+        }
+    
         if (students.length >= maxStudents) {
             alert('최대 5명의 학생만 등록할 수 있습니다.');
             return;
         }
-
+    
         if (isDuplicateStudent(selectedStudent.id)) {
             alert('이 학생 정보는 이미 등록되어 있습니다.');
             return;
         }
+    
+        // 현재 날짜를 "YYYY-MM-DD" 형식으로 설정하여 completionDate로 사용
+        const completionDate = new Date().toISOString().split('T')[0]; 
+        // 로그로 날짜 값 확인
+        console.log("Generated completionDate:", completionDate);  // 여기서 completionDate 확인
 
+        console.log("Sending data:", { studentId: selectedStudent.id, courseId, completionDate, progressRate: 0 });
+    
         fetch('http://localhost:8080/teacher/student-management/register', {
             method: 'POST',
-            credentials: 'include', // 로그인된 세션을 유지하기 위해 포함
+            credentials: 'include',
             headers: { 
                 'Content-Type': 'application/json'
-                //'X-CSRF-Token': csrfToken // CSRF 토큰 포함
             },
-            body: JSON.stringify({ studentId: selectedStudent.id, courseId })
+            body: JSON.stringify({
+                studentId: selectedStudent.id,
+                courseId,
+                completionDate,         // 완료 날짜 필드 추가
+                progressRate: 0          // 초기 진행률 설정
+            })
         })
         .then(response => {
             if (response.status === 403) {
@@ -162,22 +182,24 @@ document.addEventListener('DOMContentLoaded', () => {
             return response.json();
         })
         .then(data => {
-            if (data.status === "success") {
+            if (data.status === "OK") {
                 const studentToAdd = {
                     id: selectedStudent.id,
                     name: selectedStudent.name,
                     course: selectedCourse
                 };
-
+    
                 students.push(studentToAdd);
                 localStorage.setItem('students', JSON.stringify(students));
                 updateStudentList();
-
+    
                 selectedStudent = null;
                 selectedStudentDiv = null;
-
+    
                 document.getElementById('student-id').value = '';
                 document.getElementById('course').value = '';
+                const searchResultDiv = document.getElementById('search-result');
+                searchResultDiv.innerHTML = '';
 
                 alert("학생이 성공적으로 등록되었습니다.");
             } else {
@@ -189,7 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert(`오류 발생: ${error.message}`);
         });
     });
-
+    
     // 저장된 학생 목록 업데이트
     function updateStudentList() {
         const studentListDiv = document.getElementById('student-list');
@@ -200,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
             studentDiv.classList.add('student-item');
             studentDiv.innerHTML = 
                 `<span>${student.name} (${student.id}) - ${student.course}</span>
-                <button type="button" class="delete-btn" data-index="${index}">삭제</button>`;
+                <button type="button" class="delete-btn" data-index="${index}">Ⅹ</button>`;
 
             studentDiv.querySelector('.delete-btn').addEventListener('click', function () {
                 deleteStudent(index);
@@ -212,9 +234,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 학생 삭제 처리
     function deleteStudent(index) {
-        students.splice(index, 1);
-        localStorage.setItem('students', JSON.stringify(students));
-        updateStudentList();
+        const studentToDelete = students[index];
+        const studentId = studentToDelete.id;
+
+        const requestData = {
+            message: "학생 강의 삭제",
+            studentId: studentId
+        };
+
+        fetch('http://localhost:8080/teacher/student-management', {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(requestData)
+        })
+        .then(response => {
+            if (response.status === 204) {
+                students.splice(index, 1);
+                localStorage.setItem('students', JSON.stringify(students));
+                updateStudentList();
+                alert("학생이 성공적으로 삭제되었습니다.");
+            } else {
+                return response.text().then(text => {
+                    throw new Error(text || "학생 삭제 오류");
+                });
+            }
+        })
+        .catch(error => {
+            alert(`오류 발생: ${error.message}`);
+        });
     }
 
     // 중복 학생 검사 함수
