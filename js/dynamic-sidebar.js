@@ -76,14 +76,12 @@ class DynamicSidebar extends HTMLElement {
             padding-left:1vw;
             padding-right:1vw
         }
-        /* 공통 스타일 */
         .sidebar {
             width: 18vw;
             height: 95vh;
             background-color: #ffffff;
             border-right: 1px solid #ddd;
             border-radius: 30px 0 0 30px;
-            //overflow-y: auto; /* 스크롤 허용 */
             padding-top:20px;
         }
         .profile {

@@ -15,28 +15,7 @@
 <body>
     <div class="container">
         <!-- 사이드바 -->
-        <aside class="sidebar">
-            <div class="profile">
-                <img src="../images/book_puppy.png" alt="프로필 사진" class="profile-image">
-                <p class="username">이은비 학생</p>
-                <p class="location">청주지역</p>
-            </div>
-            <nav class="nav">
-                <ul>
-                    <ul class="basic-menu">
-                        <li><a href="../main/main.html">메인페이지</a></li>
-                        <li><a href="../account/profile.html">프로필 관리</a></li>
-                        <hr>
-                    </ul>
-                    <ul class="role-menu">
-                        <li class="active" onclick="click_role_menu()">학습</li>
-                            <ul class="sub-menu">
-                                <li><a href="../student/contents.html">강의 컨텐츠 학습</a></li>
-                            </ul>
-                    </ul>
-                </ul>
-            </nav>
-        </aside>
+        <dynamic-sidebar></dynamic-sidebar>
 
         <!-- 메인 컨텐츠 -->
         <div class="main-container">
@@ -118,6 +97,7 @@
         </div>
 
     </div>
+    <script type="module" src="../../js/dynamic-sidebar.js"></script>
     <script type="text/javascript" src="../../js/introduce.js"></script> 
 </body>
 

@@ -140,15 +140,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-
-function click_role_menu() {
-    var li = document.getElementsByClassName("active")[0];
-    var ul = document.getElementsByClassName("sub-menu")[0];
-    if (getComputedStyle(ul).visibility == "hidden") {
-        ul.style.visibility = "visible";
-        li.style.cssText = "font-weight: bolder;";
-    } else {
-        ul.style.visibility = "hidden";
-        li.style.cssText = "font-weight: normal;";
-    }
-}
