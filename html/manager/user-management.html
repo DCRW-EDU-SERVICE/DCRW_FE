@@ -5,22 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원 관리(관리자)</title>
     <link rel="stylesheet" href="../../css/manager.css">
-    <script>
-        function loadSidebar(){
-            fetch('../manager/manager-sidebar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementsByClassName('sidebar')[0].innerHTML=data;
-                })
-        }
-        window.onload = loadSidebar;
-    </script>
 </head>
 <body>
     <div class="container">
         <!-- 사이드바 -->
-        <aside class="sidebar">
-        </aside>
+        <dynamic-sidebar></dynamic-sidebar>
         <!-- 메인 컨텐츠 -->
         <main class="main-content">
             <div class="top">
@@ -78,10 +67,12 @@
                                 <td>${user.teacherCode}</td>
                             </tr>
                         </tbody>
+                    </table>
                 </div>
             </section>
         </main>
     </div>
+    <script type="module" src="../../js/dynamic-sidebar.js"></script>
     <script src="../../js/manager.js"></script>
 </body>
 </html>

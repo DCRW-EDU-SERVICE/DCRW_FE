@@ -6,23 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/contents.css">
     <title>강의 컨텐츠 관리</title>
-    <script>
-        function loadSidebar(){
-            fetch('../teacher/teacher-sidebar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementsByClassName('sidebar')[0].innerHTML=data;
-                })
-        }
-        window.onload = loadSidebar;
-    </script>
 </head>
 
 <body>
     <div class="container">
         <!-- 사이드바 -->
-        <aside class="sidebar">
-        </aside>
+        <dynamic-sidebar></dynamic-sidebar>
 
         <!-- 메인 컨텐츠 -->
         <main class="main-content">
@@ -78,6 +67,7 @@
             </section>
         </main>
     </div>
+    <script type="module" src="../../js/dynamic-sidebar.js"></script>
     <script src="../../js/contents.js"></script>
 </body>
 

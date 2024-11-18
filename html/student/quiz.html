@@ -6,25 +6,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/student_quiz.css">
-    <title>AI 퀴즈</title>
-    <script>
-        function loadSidebar(){
-            fetch('../student/student-sidebar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementsByClassName('sidebar')[0].innerHTML=data;
-                })
-        }
-        window.onload = loadSidebar;
-    </script>
+    <title>한국어 퀴즈</title>
 </head>
 
 <body>
     <div class="container">
         <!-- 사이드바 -->
-        <aside class="sidebar">
-            
-        </aside>
+        <dynamic-sidebar></dynamic-sidebar>
         
         <!-- 메인 컨텐츠 -->
         <main class="main-content">
@@ -58,6 +46,7 @@
             </div>
         </div>
     </div>
+    <script type="module" src="../../js/dynamic-sidebar.js"></script>
     <script src="../../js/student_quiz.js"></script>
 </body>
 

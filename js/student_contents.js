@@ -113,7 +113,9 @@ document.addEventListener('DOMContentLoaded', function () {
         quizButton.addEventListener('click', function () {
             alert(`${i}주차 퀴즈로 이동합니다!`);
             // 퀴즈 페이지로 이동하는 경우 아래 코드를 사용
-            // window.location.href = `/quiz?week=${i}`;
+            //window.location.href = `/quiz?week=${i}`;
+            //일단 기본 퀴즈 화면으로 넘어가도록 지정함
+            window.location.href = '../student/quiz.html'
         });
         buttonContainer.appendChild(quizButton)
         bodyDiv.appendChild(buttonContainer);
@@ -138,15 +140,3 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
-
-function click_role_menu() {
-    var li = document.getElementsByClassName("active")[0];
-    var ul = document.getElementsByClassName("sub-menu")[0];
-    if (getComputedStyle(ul).visibility == "hidden") {
-        ul.style.visibility = "visible";
-        li.style.cssText = "font-weight: bolder;";
-    } else {
-        ul.style.visibility = "hidden";
-        li.style.cssText = "font-weight: normal;";
-    }
-}
