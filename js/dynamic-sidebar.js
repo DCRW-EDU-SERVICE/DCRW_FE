@@ -74,11 +74,11 @@ class DynamicSidebar extends HTMLElement {
             padding-top:2.5vh;
             padding-bottom:2.5vh;
             padding-left:1vw;
-            padding-right:1vw
+            padding-right:1vw;
         }
         .sidebar {
             width: 18vw;
-            height: 95vh;
+            height: 80vh;
             background-color: #ffffff;
             border-right: 1px solid #ddd;
             border-radius: 30px 0 0 30px;
@@ -105,7 +105,11 @@ class DynamicSidebar extends HTMLElement {
             margin-bottom: 3px;
         }
         .location {
+            width: 50%;
             color: gray;
+            background-color:#fff;
+            border-radius: 20px;
+            margin:0 auto;
         }
         .nav{
             width: 60%;

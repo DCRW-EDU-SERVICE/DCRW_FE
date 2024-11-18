@@ -15,15 +15,17 @@ body {
     width: 97.5vw;
     height: 94vh;
     display: flex;
-    padding-top: 2.5vh;
-    padding-bottom: 2.5vh;
-    padding-left: 1vw;
-    padding-right: 1vw;
+    padding: 2.5vh 1vw;
 }
-.main-container {
-    width: 80vw;
-    height: 95vh;
-    border-radius: 0px 30px 30px 0px;
+/* 메인 컨텐츠 스타일 */
+.main-content {
+    width: 80%;
+    height: 110vh;
+    flex-grow: 1;
+    padding: 10px;
+    padding-bottom: 0;
+    border-radius: 0px 30px 0px 0px;
+    background-color: #fff;
 }
 
 /*헤더:로고*/
