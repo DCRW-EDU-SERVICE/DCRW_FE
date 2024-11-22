@@ -69,11 +69,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     try {
       // 회원가입 API 요청
-      const response = await fetch("http://13.209.48.39/signup", {
+      const response = await fetch("http://localhost:8080/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-CSRF-Token": csrfToken, // CSRF 토큰을 헤더에 추가
+          //"X-CSRF-Token": csrfToken, // CSRF 토큰을 헤더에 추가
         },
         credentials: "include",
         body: JSON.stringify({

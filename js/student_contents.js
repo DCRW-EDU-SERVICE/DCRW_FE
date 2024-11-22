@@ -103,6 +103,21 @@ document.addEventListener('DOMContentLoaded', function () {
         // 콘텐츠 div를 아코디언 body에 추가
         bodyDiv.appendChild(contentDiv);
 
+        // 퀴즈 버튼 추가
+        const buttonContainer = document.createElement('div');
+        buttonContainer.classList.add('btn-container');
+
+        const quizButton = document.createElement('button');
+        quizButton.classList.add('quiz-button');
+        quizButton.textContent = '퀴즈 풀기';
+        quizButton.addEventListener('click', function () {
+            alert(`${i}주차 퀴즈로 이동합니다!`);
+            // 퀴즈 페이지로 이동하는 경우 아래 코드를 사용
+            // window.location.href = `/quiz?week=${i}`;
+        });
+        buttonContainer.appendChild(quizButton)
+        bodyDiv.appendChild(buttonContainer);
+
         // 아코디언 아이템을 부모에 추가
         accordionItem.appendChild(headerButton);
         accordionItem.appendChild(bodyDiv);
