@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function () {
             body: JSON.stringify({ 
                 courseId: courseId,     // 필요 시 courseId 값 설정
                 studentId: studentId, // 필요 시 사용, 현재 null로 설정
-                
             })
         })
         .then(response => response.json())
@@ -93,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // 아코디언 헤더 생성
             const headerButton = document.createElement('button');
             headerButton.classList.add('accordion-header');
-            headerButton.setAttribute('aria-expanded', 'false');
+            headerButton.setAttribute('aria-expanded', i === 0 ? 'true' : 'false'); // 첫 번째 항목만 열린 상태
             headerButton.textContent = `${week}주차`;
 
             // 아코디언 바디 생성

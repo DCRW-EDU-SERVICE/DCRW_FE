@@ -4,8 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const addWeekButton = document.getElementById('add-week');
     const weekContainer = document.getElementById('week-container');
     let weekCount = 1;  // 기본 주차 번호
-    let isLectureSelected = false; // 강의가 선택되었는지 여부를 추적
-    let cachedCourseData = null;
 
     // 강의 목록 항목 클릭 이벤트
     const lectureItems = document.querySelectorAll('.lecture-item');
@@ -113,7 +111,6 @@ document.addEventListener("DOMContentLoaded", function () {
 function findCourseByLectureName(lectureName) {
     const responseData = window.responseData; // 서버에서 받은 데이터
     const courses = responseData?.data?.course || [];
-    console.log("전체 강의 목록:", courses);
 
     for (const course of courses) {
         const foundStudent = course.student.find(student => {
@@ -122,7 +119,6 @@ function findCourseByLectureName(lectureName) {
         });
 
         if (foundStudent) {
-            console.log("찾은 강의 데이터:", course);
             return course; // 해당 강의(course)를 반환
         }
     }
@@ -214,7 +210,6 @@ function createWeekPlanElement(content, weekNumber) {
 
 // 서버로부터 강의 목록을 불러오는 함수
 async function sendRequest() {
-    const csrfToken = document.cookie.split('; ').find(row=>row.startsWith('XSRF-TOKEN='))?.split('=')[1];
     const response = await fetch('http://localhost:8080/teacher/course', {
       method: 'GET',
       headers: {
@@ -225,13 +220,11 @@ async function sendRequest() {
     });
   
     if (!response.ok) {
-      alert("서버에서 강의 목록을 불러오지 못했습니다. 다시 시도해주세요.");
       return null;
     }
   
     const data = await response.json();
     window.responseData = data;
-    console.log("Response data:", data);
     return data;
   }
   
@@ -286,6 +279,7 @@ async function sendRequest() {
             // 편집 버튼 클릭 이벤트 추가
             editButton.addEventListener('click', async (event) => {
                 const item = event.target.closest('.lecture-item');
+                const serviceName = item.querySelector('.service-name').textContent;
                 const lectureName = item.querySelector('.lecture-name').textContent;
                 const course = findCourseByLectureName(lectureName);
                 if (!course) {
@@ -295,7 +289,7 @@ async function sendRequest() {
                 const courseId = course.courseId;
     
                 // courseId를 받아서 강의 세부 사항을 불러옵니다
-                loadLectureDetails(courseId);
+                loadLectureDetails(courseId, serviceName);
             });
             // 강의 항목 클릭 이벤트 리스너 추가
             lectureItem.addEventListener('click', (event) => {
@@ -317,8 +311,7 @@ async function sendRequest() {
     }
 }
 // 강의 세부 사항을 불러오는 함수
-function loadLectureDetails(courseId) {
-    console.log("API 요청 courseId:", courseId);
+function loadLectureDetails(courseId, serviceName) {
     fetch(`http://localhost:8080/teacher/course/${courseId}`, {
         method:'GET',
         headers: {
@@ -331,7 +324,7 @@ function loadLectureDetails(courseId) {
         if (data.status === "OK") {
             // 성공적으로 데이터를 받으면
             const coursePlans = data.data.coursePlanDto;  // 강의계획서 목록
-            displayCoursePlans(coursePlans);
+            displayCoursePlans(coursePlans, serviceName);
         } else {
             console.error('강의 수정 실패:', data.message);
         }
@@ -341,10 +334,11 @@ function loadLectureDetails(courseId) {
     });
 }
 
-function displayCoursePlans(coursePlans) {
-    //매개변수..등으로 course 값 불러와서 제목 표시하기
-    //const lectureTitleInput = document.getElementById('lecture-title');
-    //lectureTitleInput.value = course.title;
+function displayCoursePlans(coursePlans, serviceName) {
+    //제목 표시
+    const lectureTitleInput = document.getElementById('lecture-title');
+    lectureTitleInput.value = serviceName;
+
     const weekContainer = document.querySelector("#week-container");  // 아코디언을 추가할 컨테이너
   
     // 기존의 내용을 지우고 새로 추가
@@ -355,7 +349,6 @@ function displayCoursePlans(coursePlans) {
         return;
     }
     coursePlans.forEach(plan => {
-        console.log(`주차: ${plan.week}, 내용: ${plan.content}`);
       const weekNumber = plan.week;  // 주차
       const content = plan.content;  // 해당 주차의 내용
   
