@@ -221,7 +221,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const studentDiv = document.createElement('div');
             studentDiv.classList.add('student-item');
             studentDiv.innerHTML = 
-                `<span>${student.name} (${student.id}) - ${student.course}</span>
+                `<div class="name">
+                        <span class="service-name">${student.course}</span>
+                        <span class="lecture-name">${student.name}(${student.id}) 학생의 강의</span>
+                </div>
                 <button type="button" class="delete-btn" data-index="${index}">Ⅹ</button>`;
 
             studentDiv.querySelector('.delete-btn').addEventListener('click', function () {
