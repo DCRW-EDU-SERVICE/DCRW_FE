@@ -70,14 +70,18 @@ h5 span{
     table-layout: fixed;
     margin: 0 auto;
 }
-
+.con-table th{
+    background-color: #0366d1;
+    color: #fff;
+}
 .con-table th, .con-table td {
     text-align: center;
     width: 100%;
-    /*word-wrap: break-word;*/
+    height: 50px;
+    word-wrap: break-word;
     table-layout: fixed;
     margin: 0 auto;
-    border: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
 }
 .con-table #check{
     width: 30%;
@@ -131,6 +135,23 @@ h3{
 .quiz-list{
     height: 50%;
     margin-bottom: 20px;
+    overflow-y: auto;
+}
+.quiz-list::-webkit-scrollbar {
+    width: 8px; /* 스크롤바 너비 */
+}
+
+.quiz-list::-webkit-scrollbar-thumb {
+    background-color: #007bff; /* 스크롤바 색상 */
+    border-radius: 4px; /* 둥근 모서리 */
+}
+
+.quiz-list::-webkit-scrollbar-thumb:hover {
+    background-color: #004590; /* 호버 시 색상 */
+}
+
+.quiz-list::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* 스크롤 트랙 색상 */
 }
 .one-quiz-div{
     display: flex;
@@ -142,22 +163,17 @@ h3{
 }
 .quiz-question, .quiz-opt>input:first-child, .quiz-answer{
     margin-left: 30px;
-    border: none;
-    height: 30px;
+    height: 20px;
     cursor:default;
 }
-.quiz-question:focus, .quiz-opt > input:focus, .quiz-answer:focus{
-    outline: none;
-}
 .quiz-question, .quiz-answer{
-    width: 80%;
+    width: 100%;
 }
 .quiz-opt input{
     margin-left: 5px;
-    height: 30px;
+    height: 20px;
     cursor:default;
     width: 70px;
-    border: none;
 }
 .check-div{
     width: 20%;

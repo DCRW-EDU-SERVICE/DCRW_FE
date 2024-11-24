@@ -129,12 +129,15 @@ class DynamicSidebar extends HTMLElement {
         }
         .nav ul.basic-menu hr {
             margin-top: 3vh;
-            margin-bottom: 3vh;
-
+            margin-bottom: 2vh;
+        }
+        .role-menu .active{
+          font-weight: bolder;
+          margin-top: 1vh;
         }
         .sub-menu{
             margin-left: 10%;
-            margin-top: 10%;
+            margin-top: 5%;
             visibility: hidden;
         }
         .sub-menu li a {
@@ -163,6 +166,15 @@ class DynamicSidebar extends HTMLElement {
     attachSubMenuToggle() {
       const activeMenuItem = this.shadowRoot.querySelector(".active");
       if (activeMenuItem) {
+        const subMenu = activeMenuItem.nextElementSibling;
+
+        // 초기 상태: 서브메뉴 열기
+        if (subMenu && subMenu.classList.contains("sub-menu")) {
+          subMenu.style.visibility = "visible"; // 서브 메뉴 보이기
+          activeMenuItem.style.fontWeight = "bolder"; // 메뉴 강조
+        }
+
+        // 클릭 이벤트 연결
         activeMenuItem.addEventListener("click", this.toggleSubMenu.bind(this));
       }
     }
