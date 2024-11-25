@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const createButton = document.querySelector(".create-btn");
     const tableBody = document.querySelector(".con-table tbody");
     const quizListContainer = document.querySelector(".quiz-list");
+    const btnContainer = document.querySelector(".btn-container"); // 기존 HTML에 정의된 .btn-container
+
 
     // 페이지 로드 시 quiz-results 섹션 숨기기
     quizResultsSection.classList.add("hidden");
@@ -67,34 +69,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
             quizDiv.innerHTML = `
                 <div class="qna-div">
-                    <input type="text" class="quiz-question" value="${index + 1}. ${quiz.question}">
+                    <input type="text" class="quiz-question" value="Q. ${quiz.question}">
                     <div class="quiz-opt">
                         <input type="text" value="① ${quiz.option1}">
                         <input type="text" value="② ${quiz.option2}">
                         <input type="text" value="③ ${quiz.option3}">
                         <input type="text" value="④ ${quiz.option4}">
                     </div>
-                    <input type="text" class="quiz-answer" value="정답: ${quiz.answer}">
+                    <input type="text" class="quiz-answer" value="A. ${quiz.answer}">
                 </div>
                 <div class="check-div">
                     <input type="checkbox" id="check-${index}" class="quiz-select">
                     <label for="check-${index}"></label>
                 </div>
             `;
-            // 동적으로 input 크기 조정
-            resizeInput(quizDiv.querySelector(".quiz-question"));
-            quizDiv.querySelectorAll(".quiz-opt input").forEach(input => resizeInput(input));
-            resizeInput(quizDiv.querySelector(".quiz-answer"));
 
             quizListContainer.appendChild(quizDiv);
         });
-        const btnContainer = document.createElement("div");
-        btnContainer.classList.add("btn-container");
-        btnContainer.innerHTML = `
-            <button class="save-btn">저장</button>
-            <button class="recreate-btn">다시 선택</button>
-        `;
-        quizListContainer.appendChild(btnContainer);
 
         // '저장' 버튼 클릭 이벤트 핸들러 추가
         const saveButton = btnContainer.querySelector(".save-btn");
@@ -171,13 +162,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // input 크기 동적 조정 함수
-    function resizeInput(input) {
-        const textLength = input.value.length;
-        input.style.width = `${Math.min(Math.max(textLength * 10, 100), 500)}px`; // 최소 100px, 최대 500px
-        input.style.height = `${Math.max(30, Math.ceil(textLength / 30) * 30)}px`; // 한 줄당 30px
-    }
-
     // '퀴즈 생성' 버튼 클릭 시 다음 섹션으로 넘어가는 이벤트
     createButton.addEventListener("click", async function () {
         const selectedCheckbox = tableBody.querySelector("input[type='checkbox']:checked");
@@ -197,6 +181,9 @@ document.addEventListener("DOMContentLoaded", function() {
         const contentId = selectedCheckbox.value;
         const subject = createInput.value;
         const count = 10;
+
+        // 로딩 화면 표시
+        showLoading();
 
         try {
             const response = await fetch(`http://localhost:8080/teacher/quiz/generate?content=${contentId}&subject=${encodeURIComponent(subject)}&count=${count}`, {
@@ -223,6 +210,9 @@ document.addEventListener("DOMContentLoaded", function() {
         } catch (error) {
             console.error(error);
             alert("퀴즈 생성 중 오류가 발생했습니다.");
+        } finally {
+            // 로딩 화면 숨기기
+            hideLoading();
         }
     });
 
@@ -242,3 +232,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     //더 창의적인 퀴즈 - 아니오 버튼 기능
 });
+// 로딩 화면 표시 함수
+function showLoading() {
+    const loadingSpinner = document.querySelector(".loading-spinner");
+    loadingSpinner.classList.remove("hidden");
+}
+
+// 로딩 화면 숨기기 함수
+function hideLoading() {
+    const loadingSpinner = document.querySelector(".loading-spinner");
+    loadingSpinner.classList.add("hidden");
+}
