@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // 강의 ID와 콘텐츠를 가져오는 함수
     async function fetchCourseAndContents() {
         try {
+            /*
             // 강의 정보 요청
             const courseResponse = await fetch('http://localhost:8080/teacher/course', {
                 method: 'GET',
@@ -30,9 +31,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const course = courseData[0]; // 학생의 단일 강의를 가정
             const courseId = course.courseId;
             lectureTitleElement.textContent = course.title;
-
+*/
             // 강의 콘텐츠 요청
-            await fetchContents(courseId);
+            await fetchContents(1);
         } catch (error) {
             console.error('강의 데이터를 불러오는 중 오류:', error);
             lectureTitleElement.textContent = '강의 데이터를 불러올 수 없습니다.';
