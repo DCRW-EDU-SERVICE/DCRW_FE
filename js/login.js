@@ -27,7 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const data = await response.json();
       if (data.message === "Login successful") {
-        document.cookie = `csrfToken=${data.csrfToken}; path=/; secure`; // 서버에서 받은 CSRF 토큰을 쿠키에 저장
+        //document.cookie = `csrfToken=${data.csrfToken}; path=/; secure`; // 서버에서 받은 CSRF 토큰을 쿠키에 저장
+        localStorage.setItem("role", data.role);
         localStorage.setItem("isLoggedIn", "true"); // 로그인 상태 저장
         window.location.href = "../../html/main/main.html"; // 메인 페이지로 이동
         console.log(document.cookie);
@@ -89,7 +90,7 @@ async function sendLoginRequest() {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      //"X-XSRF-TOKEN": csrfToken,
+      // 'X-XSRF-TOKEN': csrfToken
     },
     credentials: "include",
     body: JSON.stringify({ username: userId, password: password }),

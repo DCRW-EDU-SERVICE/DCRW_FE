@@ -15,30 +15,7 @@
 <body>
     <div class="container">
         <!-- 사이드바 -->
-        <aside class="sidebar">
-            <div class="profile">
-                <img src="../images/book_puppy.png" alt="프로필 사진" class="profile-image">
-                <p class="username">권다은 선생님</p>
-                <p class="location">천안지역</p>
-            </div>
-            <nav class="nav">
-                <ul>
-                    <ul class="basic-menu">
-                        <li><a href="#">메인페이지</a></li>
-                        <li><a href="../account/profile.html">프로필 관리</a></li>
-                        <hr>
-                    </ul>
-                    <ul class="role-menu">
-                        <li class="active" onclick="click_role_menu()">강의 및 학생관리</li>
-                        <ul class="sub-menu">
-                            <li><a href="../teacher/course.html">강의 계획서 관리</a></li>
-                            <li><a href="../teacher/contents.html">강의 컨텐츠 관리</a></li>
-                            <li><a href="../teacher/student-management.html">학생관리</a></li>
-                        </ul>
-                    </ul>
-                </ul>
-            </nav>
-        </aside>
+        <dynamic-sidebar></dynamic-sidebar>
 
         <!-- 메인 컨텐츠 -->
         <div class="main-container">
@@ -51,7 +28,7 @@
                 <ul>
                     <li><a href="../main/introduce.html">다채로와란?</a></li>
                     <li><a href="#">서비스 소개</a></li>
-                    <li><a href="../board/bulletin-board.html">전체게시판</a></li>
+                    <li><a href="../board/bulletin-board.html?boardType=0">전체게시판</a></li>
                     <li><a href="#">퀴즈나라</a></li>
                 </ul>
             </nav>
@@ -88,7 +65,12 @@
         </div>
 
     </div>
-    <script type="text/javascript" src="../../js/main.js"></script>
+    <<<<<<< HEAD <script type="text/javascript" src="../../js/main.js">
+        </script>
+        =======
+        <script type="module" src="../../js/dynamic-sidebar.js"></script>
+        <script type="text/javascript" src="../../js/main.js"></script>
+        >>>>>>> origin/develop
 </body>
 
 </html>

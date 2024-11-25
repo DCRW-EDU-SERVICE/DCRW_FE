@@ -11,8 +11,7 @@
 <body>
     <div class="container">
         <!-- 사이드바 -->
-        <aside class="sidebar">
-        </aside>
+        <dynamic-sidebar></dynamic-sidebar>
         <!-- 메인 컨텐츠 -->
         <main class="main-content">
             <!-- 학생 목록 -->
@@ -51,35 +50,10 @@
             </section>
         </main>
     </div>
+    <script type="module" src="../../js/dynamic-sidebar.js"></script>
     <script src="../../js/student-management.js"></script>
     <script>
-        function loadSidebar() {
-            fetch('../teacher/teacher-sidebar.html')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('네트워크 응답이 좋지 않습니다.');
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    document.getElementsByClassName('sidebar')[0].innerHTML = data;
-
-                    // 사이드바 로드 후 사용자 이름 설정
-                    const usernameElement = document.querySelector(".username");
-                    const username = localStorage.getItem("username");
-                    if (usernameElement && username) {
-                        usernameElement.textContent = `${username} 선생님`;
-                    }
-                })
-                .catch(error => {
-                    console.error('사이드바 로드 중 오류 발생:', error);
-                });
-        }
-
-        // 사이드바 로드 호출
-        loadSidebar();
-
-        document.getElementById('student-form').addEventListener('submit', function(event) {
+        document.getElementById('student-form').addEventListener('submit', function (event) {
             event.preventDefault(); // 기본 제출 방지
             // 여기에 학생 등록 로직 추가
             console.log('학생이 등록되었습니다.');
