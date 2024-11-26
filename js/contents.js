@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', async function () {
-    loadLectures(); // 강의 목록 불러오기
+    let globalContentList = null; // 전역 콘텐츠 데이터 저장
+    let courseData = null; // 현재 선택된 강의 데이터
     const accordionContainer = document.getElementById('accordion-container');
     const lectureTitleElement = document.getElementById('lecture-title');
+
+    loadLectures(); // 강의 목록 불러오기
     
     const addWeekButton = document.getElementById('add-week');
     const weekContainer = document.getElementById('week-container');
@@ -88,7 +91,6 @@ document.addEventListener('DOMContentLoaded', async function () {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            //'X-XSRF-TOKEN' : csrfToken
         },
         credentials: 'include'
         });
@@ -151,20 +153,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                 lectureList.appendChild(lectureItem);
                 // 편집 버튼 클릭 이벤트 추가
                 editButton.addEventListener('click', async (event) => {
-                    const item = event.target.closest('.lecture-item');
-                    const serviceName = item.querySelector('.service-name').textContent;
-                    const lectureName = item.querySelector('.lecture-name').textContent;
-                    const course = findCourseByLectureName(lectureName);
-                    if (!course) {
-                        alert("해당 강의를 찾을 수 없습니다.");
-                        return;
-                    }
                     const courseId = course.courseId;
                     const studentId = student.studentId;
-                    console.log("수정 버튼 클릭: courseId:", courseId, "studentId:", studentId);
-        
-                    // courseId를 받아서 강의 세부 사항을 불러옵니다
-                    loadLectureDetails(courseId, studentId, serviceName);
+                    const serviceName = course.title;
+
+                    console.log('수정 버튼 클릭: courseId:', courseId, 'studentId:', studentId);
+
+                    // 강의 세부 사항 로드
+                    await loadLectureDetails(courseId, studentId, serviceName);
                 });
                 // 강의 항목 클릭 이벤트 리스너 추가
                 lectureItem.addEventListener('click', (event) => {
@@ -268,14 +264,14 @@ document.addEventListener('DOMContentLoaded', async function () {
         lectureTitleInput.value = serviceName;
         
         accordionContainer.innerHTML = '';
-        contentList.forEach((plan, i) => {
-            const week = plan.week;
+        contentList.forEach((content, index) => {
+            const week = content.week;
             const accordionItem = document.createElement('div');
             accordionItem.classList.add('accordion-item');
     
             const headerButton = document.createElement('button');
             headerButton.classList.add('accordion-header');
-            headerButton.setAttribute('aria-expanded', i === 0 ? 'true' : 'false'); // 첫 번째 항목만 열린 상태
+            headerButton.setAttribute('aria-expanded', index === 0 ? 'true' : 'false'); // 첫 번째 항목만 열린 상태
             headerButton.textContent = `${week}주차`;  // 주차 제목
     
             const bodyDiv = document.createElement('div');
@@ -305,7 +301,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             saveBtn.classList.add('save-btn');
             deleteBtn.classList.add('delete-btn');
     
-            const viewer = displayViewer(plan.fileType,plan.fileUrl);
+            const viewer = displayViewer(content.fileType, content.fileUrl);
     
             // 드래그 앤 드롭, 파일 선택 이벤트 처리
             dropArea.addEventListener('dragover', (e) => {
@@ -333,27 +329,25 @@ document.addEventListener('DOMContentLoaded', async function () {
             });
     
             fileInput.addEventListener('change', () => {
-                const uploadedFile = fileInput.files[0];
-                if (uploadedFile) {
-                    updateViewer(uploadedFile, viewer);
+                const file = fileInput.files[0];
+                if (file) {
+                    updateViewer(file, viewer);
                 }
             });
     
             // 저장 버튼 클릭 이벤트
-            saveBtn.addEventListener('click', () => {
-                const uploadedFile = fileInput.files[0];
-                if (uploadedFile) {
-                    uploadContent(courseData.courseId, i + 1, uploadedFile);  // week은 1부터 시작하므로 i+1
+            saveBtn.addEventListener('click', async () => {
+                const file = fileInput.files[0];
+                if (file) {
+                    await uploadContent(courseData.courseId, content.week, file);
                 } else {
-                    alert('파일을 업로드해주세요.');
+                    alert('업로드할 파일을 선택하세요.');
                 }
             });
     
             // 삭제 버튼 클릭 이벤트
-            deleteBtn.addEventListener('click', () => {
-                const contentId = plan.contentId; // 서버에서 받은 콘텐츠 ID 사용
-                deleteContent(contentId);
-                fileInput.value = '';
+            deleteBtn.addEventListener('click', async () => {
+                await deleteContent(content.contentId);
                 viewer.innerHTML = '';
             });
     
@@ -374,8 +368,8 @@ document.addEventListener('DOMContentLoaded', async function () {
             accordionContainer.appendChild(accordionItem);
     
             // 주차에 저장된 강의 콘텐츠가 있는 경우 뷰어로 표시
-            if (plan.filePath) {
-                displayViewer(plan.fileType,plan.fileUrl);
+            if (content.filePath) {
+                displayViewer(content.fileType,content.fileUrl);
             }
     
             // 아코디언 클릭 이벤트
@@ -393,8 +387,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         // 뷰어 업데이트
         viewerElement.innerHTML = ''; // 기존 뷰어 내용 제거
-        const newViewer = displayViewer(fileType, fileUrl); // 새 파일에 대한 뷰어 생성
-        viewerElement.appendChild(newViewer); // 뷰어 추가
+        viewerElement.appendChild(displayViewer(fileType, fileUrl));
     }
     // 파일 뷰어 생성
     function displayViewer(fileType, fileUrl) {
