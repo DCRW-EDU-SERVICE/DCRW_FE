@@ -23,58 +23,32 @@ body {
     height: 110vh;
     flex-grow: 1;
     padding: 10px;
-    padding-bottom: 0;
     border-radius: 0px 30px 0px 0px;
     background-color: #fff;
 }
 
 .quiz-contents{
-    height: 90%;
+    height: 100%;
     padding: 15px;
     border: 1px solid #333;
     border-radius: 20px;
     background-color: #fff;
     margin-bottom: 10px;
 }
-/* 퀴즈 테마 탭 스타일 */
-.quiz-theme {
+.progress-box{
+    align-items: center;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 20px;
 }
-
-.tab-nav {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    border-bottom: 2px solid #007bff;
-    padding-bottom:10px ;
+#progress-text {
+    font-size: 1.2rem; /* 글씨 크기 */
+    font-weight: bold;
+    color: #007bff;
 }
-
-.tab-link {
-    margin-right: 10px;
-}
-
-/* 탭 링크 스타일 */
-.tab-link a {
-    text-decoration: none;
-    color: #007bff; /* 기본 텍스트 색상 */
-    padding: 10px;
-    transition: background-color 0.3s, color 0.3s; /* 색상 변화 추가 */
-}
-
-/* 선택된 탭 스타일 */
-.tab-link.current a {
-    background-color: #007bff; /* 선택된 탭 배경색 */
-    color: #fff; /* 선택된 탭 텍스트 색상 */
-}
-
-/* 탭 호버 효과 */
-.tab-link a:hover {
-    background-color: #e7f1ff; /* 호버 시 배경색 */
-}
-
 /* 문제 상자 스타일 */
 .question-box {
+    height: 100%;
     background-color: #fff;
     border: 1px solid #ccc;
     border-bottom: none;

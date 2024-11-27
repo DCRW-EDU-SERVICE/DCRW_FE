@@ -168,6 +168,8 @@ textarea {
 }
 /* 드래그 앤 드롭 영역 스타일 */
 .drop-area {
+    height: 80px;
+    line-height: 80px;
     border: 2px dashed #007bff; /* 대시 선 테두리 */
     padding: 20px; /* 패딩 */
     text-align: center; /* 중앙 정렬 */
