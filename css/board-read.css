@@ -516,6 +516,7 @@ header {
   }
   
   .comment-item button {
+    font-family: 'Noto Sans KR', sans-serif;
     margin-top: 5px;
     padding: 5px 10px;
     background-color: #f44336;
@@ -526,6 +527,7 @@ header {
   }
   
   .comment-item button:hover {
+    font-family: 'Noto Sans KR', sans-serif;
     background-color: #d32f2f;
   }
   
@@ -548,7 +550,7 @@ header {
   #comment-submit {
     padding: 10px 20px;
     background-color: #4caf50;
-    color: white;
+    color: black;
     border: none;
     border-radius: 50%;
     cursor: pointer;
