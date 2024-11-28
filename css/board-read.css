@@ -98,9 +98,7 @@ body {
 .sub-menu li a {
     margin-bottom: 1vh;
 }
-.main-nav ul li:hover{
-    text-decoration: underline;
-}
+
 .nav ul li a {
 
     text-decoration: none;
@@ -146,6 +144,9 @@ header {
     align-items: center;  
     list-style-type: none;
     
+}
+.main-nav ul li:hover{
+    text-decoration: underline;
 }
 .main-nav ul li a {
     text-decoration: none;
@@ -363,6 +364,21 @@ header {
     border: none;
     margin-top: 5px;
 }
+.hidden{
+    visibility: hidden;
+}
+#btn-edit{
+    margin-left: 20vw; 
+    color:white;
+    border: 2px solid #78d332;
+    background-color: #78d332;
+}
+#btn-delete{
+    margin-left: 5vw; 
+    background-color:#ed1c53;
+    border: 2px solid #ed1c53;
+    color: white;
+}
 #btn-save{
     margin-left: 20vw; 
     color:white;
@@ -377,7 +393,7 @@ header {
 }
 .content-container {
     width: 90%;
-    height: 95%;
+    height: 85%;
     padding: 20px;
     background-color: white;
     border-radius: 10px;
@@ -407,34 +423,30 @@ header {
     margin-bottom: 20px;
 }
 
-.file-url-upload {
-    margin: 10px 0;
+.file-section {
+    margin-top: 30px;
 }
 
-#file-url {
-    width: 80%;
-    height: 2.5rem;
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-right: 10px;
-}
-
-#file-url-label {
-    font-size: 16px;
-    font-weight: bold;
+.file-section h3 {
+    font-size: 1.5rem;
     color: #003676;
-    display: block;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
-.file-url-list {
-    margin-top: 10px;
-    border: 1px dashed #ddd;
-    padding: 10px;
-    text-align: left;
-    border-radius: 5px;
-    min-height: 3rem;
+.file-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.file-section ul li {
+    margin-bottom: 5px;
+    font-size: 1rem;
+    color: #0066cc;
+    cursor: pointer;
+}
+
+.file-section ul li:hover {
+    text-decoration: underline;
 }
 
 .button-container {
@@ -448,12 +460,103 @@ header {
     font-size: 1rem;
     font-weight: bold;
     color: white;
-    background-color: #327cd3;
     border: none;
     border-radius: 20px;
     cursor: pointer;
 }
 
 .btn-primary:hover {
-    background-color: #285a99;
+    text-decoration: underline;
 }
+#edit-button{
+    background-color: #84cb13;
+    border: 2px solid #84cb13;
+    color: white;
+    margin-left: 1rem;
+}
+#delete-button {
+    background-color: #ed1c53;
+    border: 2px solid #ed1c53;
+    color: white;
+    margin-left: 1rem;
+}
+
+#comment-section {
+    margin-top: 20px;
+    width: 85%; /* 댓글 섹션의 너비를 50%로 설정 */
+    float: left; /* 화면 왼쪽으로 배치 */
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  
+  .comment-list {
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .comment-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .comment-item p {
+    margin: 0 0 5px 0;
+    line-height: 1.5;
+    word-wrap: break-word;
+  }
+  
+  .comment-item strong {
+    font-weight: bold;
+  }
+  
+  .comment-item button {
+    margin-top: 5px;
+    padding: 5px 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .comment-item button:hover {
+    background-color: #d32f2f;
+  }
+  
+  #comment-form {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  
+  #comment-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  
+  #comment-submit {
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size:medium;
+  }
+  
+  #comment-submit:hover {
+    background-color: #45a049;
+  }
+  

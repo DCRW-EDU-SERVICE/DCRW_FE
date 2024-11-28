@@ -145,6 +145,9 @@ header {
     list-style-type: none;
     
 }
+.main-nav ul li:hover{
+    text-decoration: underline;
+}
 .main-nav ul li a {
     text-decoration: none;
     color:#333
@@ -165,6 +168,9 @@ header {
     padding: 5px;
     background-color: white;
     border-radius: 10px;
+    margin: 0 auto; /* 중앙 정렬 */
+    overflow-x: auto; /* 가로 스크롤 추가 */
+    box-sizing: border-box;
 }
 .board-name{
     width:10vw;
@@ -184,7 +190,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .board-header h2 {
@@ -192,11 +198,31 @@ header {
     font-weight: bold;
     color: #333;
 }
-.board-search{
+
+.board-search {
     display: flex;
-    margin-right:20px
+    align-items: center;
 }
 
+.search-button,
+.write-button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.search-button:hover,
+.write-button:hover {
+    background-color: #0056b3;
+}
+.write-button{
+    margin-left:20px;
+    margin-right:20px;
+}
 .board-header .search-button {
     font-family: 'Noto Sans KR', sans-serif;
     padding: 5px 10px;
@@ -209,7 +235,6 @@ header {
     border-radius: 0px 10px 10px 0px;
 }
 
-
 .board-header #search-input {
     font-family: 'Noto Sans KR', sans-serif;
     padding: 5px;
@@ -221,26 +246,60 @@ header {
 }
 
 .board-table {
-    width: 100%;
-    border-collapse: collapse;
+    width: 100%; /* content-container 크기에 맞게 테이블 크기 조정 */
+    border-collapse: collapse; 
 }
-
+/* <a> 태그 스타일 제거 */
+.board-table a {
+    text-decoration: none;
+    color: inherit; /* 부모 요소의 색상 상속 */
+    font-weight: normal; /* 글씨체 기본 설정 */
+  }
+  
+  /* 공지사항 스타일 */
+  .board-table .notice a {
+    color: red; /* 빨간색 */
+    font-weight: bold; /* 글씨 굵게 */
+  }
+  
 .board-table th,
 .board-table td {
-    padding: 10px;
+    border: none;
+    padding: 8px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    word-wrap: break-word; /* 긴 텍스트 줄바꿈 처리 */
+}
+
+/* 행 구분선만 추가 */
+.board-table tr {
+    border-bottom: 1px solid #ddd; /* 각 행의 아래쪽에만 선 추가 */
+}
+
+/* 마지막 행 구분선 제거 */
+.board-table tr:last-child {
+    border-bottom: none;
+}
+
+.notice {
+    background-color: #fff4f4; /* 연한 빨간 배경 */
 }
 
 .board-table th {
-    background-color: #f7f7f7;
-    color: #333;
+    background-color: #f2f2f2;
     font-weight: bold;
 }
+
 
 .board-table tbody tr:hover {
     background-color: #f0f8ff;
 }
+
+.notice-title {
+    color: red;
+    font-weight: bold;
+}
+
+
 
 .pagination {
     display: flex;
@@ -261,4 +320,31 @@ header {
     background-color: #007bff;
     color: #fff;
     font-weight: bold;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 5px;
+}
+
+.pagination-button,
+button {
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination-button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination button:hover {
+    background-color: #0056b3;
+    color: white;
 }
