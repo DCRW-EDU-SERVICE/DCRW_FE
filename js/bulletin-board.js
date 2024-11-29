@@ -56,13 +56,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     contents.forEach((content) => {
-      const { title, postDate, userName, category } = content;
+      const { id, title, postDate, userName, category } = content;
       const row = document.createElement("tr");
 
       row.innerHTML = `
       <td>
         <a href="./board-read.html?boardType=${boardType}&postId=${
-        content.postId
+        content.id
       }" class="post-link">${title}</a>
       </td>
       <td>${new Date(postDate).toLocaleDateString()}</td>
