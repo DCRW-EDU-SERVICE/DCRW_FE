@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../../css/main.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-    
+
     <title>메인페이지</title>
 </head>
 
@@ -21,44 +21,45 @@
         <div class="main-container">
             <!--헤더:로고-->
             <header>
-                <img src="../images/logo.png" alt="로고" class="logo-image">
+                <img src="../images/logo.png" alt="로고" class="logo-image" onclick="location.href='../main/main.html'">
+                <button id="logout-button" class="logout-button">로그아웃</button>
             </header>
             <!--메인nav-->
             <nav class="main-nav">
                 <ul>
-                <li><a href="../main/introduce.html">다채로와란?</a></li>
-                <li><a href="#">서비스 소개</a></li>
-                <li><a href="#">전체게시판</a></li>
-                <li><a href="../student/quiz.html">퀴즈나라</a></li>
+                    <li><a href="../main/introduce.html">다채로와란?</a></li>
+                    <li><a href="#">서비스 소개</a></li>
+                    <li><a href="../board/bulletin-board.html">전체게시판</a></li>
+                    <li><a href="../student/quiz.html">퀴즈나라</a></li>
                 </ul>
             </nav>
             <main class="main-content">
                 <section class="banner">
                     <div class="swiper">
                         <div class="swiper-wrapper">
-                          <div class="swiper-slide" id="commercial1"></div>
-                          <div class="swiper-slide">Slide 2</div>
-                          <div class="swiper-slide">Slide 3</div>
-                          <div class="swiper-slide">Slide 4</div>
-                          <div class="swiper-slide">Slide 5</div>
-                        </div>                    
+                            <div class="swiper-slide" id="commercial1"></div>
+                            <div class="swiper-slide" id="commercial2"></div>
+                            <div class="swiper-slide" id="commercial3"></div>
+                            <div class="swiper-slide" id="commercial4"></div>
+                            <div class="swiper-slide" id="commercial5"></div>
+                        </div>
                         <div class="swiper-button-prev">
-                          <div class="material-icons"></div>
+                            <div class="material-icons"></div>
                         </div>
                         <div class="swiper-button-next">
-                          <div class="material-icons"></div>
+                            <div class="material-icons"></div>
                         </div>
-                      </div>
+                    </div>
                 </section>
                 <section class="main-edu">
-                    <div class="reading_edu">
-                        <div class="reading_edu_button"  onclick="location.href='#'">독서교육</div>
+                    <div class="reading_edu" onclick="location.href='../board/reading-board.html?boardType=1'">
+                        <div class="reading_edu_button" onclick="location.href='../board/reading-board.html'">독서교육</div>
                     </div>
-                    <div class="korean_edu">
-                        <div class="korean_edu_button"  onclick="location.href='#'">한글교육</div>
+                    <div class="korean_edu" onclick="location.href='../board/korean-board.html?boardType=2'">
+                        <div class="korean_edu_button" onclick="location.href='../board/korean-board.html'">한글교육</div>
                     </div>
-                    <div class="parent_edu">
-                        <div class="parent_edu_button"  onclick="location.href='#'">부모교육</div>
+                    <div class="parent_edu" onclick="location.href='../board/parent-board.html?boardType=3'">
+                        <div class="parent_edu_button" onclick="location.href='../board/parent-board.html'">부모교육</div>
                     </div>
                 </section>
             </main>
@@ -66,7 +67,7 @@
 
     </div>
     <script type="module" src="../../js/dynamic-sidebar.js"></script>
-    <script type="text/javascript" src="../../js/main.js"></script> 
+    <script type="text/javascript" src="../../js/main.js"></script>
 </body>
 
 </html>

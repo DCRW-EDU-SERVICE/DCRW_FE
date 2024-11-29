@@ -67,12 +67,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // 쿠키에서 XSRF-TOKEN 값을 가져오는 함수
 function getCsrfTokenFromCookie() {
-  console.log("모든 쿠키:", document.cookie);  // 전체 쿠키를 출력해 확인
+  console.log("모든 쿠키:", document.cookie); // 전체 쿠키를 출력해 확인
 
   const csrfToken = document.cookie
-    .split('; ')
-    .find(row => row.startsWith('XSRF-TOKEN='))
-    ?.split('=')[1];
+    .split("; ")
+    .find((row) => row.startsWith("XSRF-TOKEN="))
+    ?.split("=")[1];
 
   console.log("CSRF Token from cookie:", csrfToken); // 쿠키에서 가져온 CSRF 토큰 확인
 
@@ -86,17 +86,19 @@ async function sendLoginRequest() {
   const password = document.getElementById("pw").value;
 
   // 서버의 로그인 경로 확인 후 정확하게 지정 필요
-  const response = await fetch('http://localhost:8080/login', {
-    method: 'POST',
+  const response = await fetch("http://localhost:8080/login", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
       // 'X-XSRF-TOKEN': csrfToken
     },
-    credentials: 'include',
-    body: JSON.stringify({ username: userId, password: password })
+    credentials: "include",
+    body: JSON.stringify({ username: userId, password: password }),
   });
   console.log("Request sent:", response);
-  const jsessionId = document.cookie.split('; ').find(row => row.startsWith('JSESSIONID='));
+  const jsessionId = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith("JSESSIONID="));
   console.log(jsessionId); // JSESSIONID=뒤의 값 확인
 
   return response;

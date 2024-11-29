@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
           userId: userId,
           password: password,
           name: name,
-          address: address,
+          address: `${zippCode},${address1},${address2}`,
           birthdate: birth, // yyyy-MM-dd 형식으로 전달
           //teacherCode: teacherCode,
           //joinDate: joinDate, // yyyy-MM-dd 형식으로 전달
