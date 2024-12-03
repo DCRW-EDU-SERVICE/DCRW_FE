@@ -22,6 +22,7 @@ modalOpen2.addEventListener("click", function () {
   modal.style.display = "block";
 });
 modalOpen3.addEventListener("click", function () {
+  document.getElementById("member-name").innerText = "장현희";
   document.getElementById("role1").innerText = "DB 설계 및 구현";
   document.getElementById("role2").innerText = "프롬프팅";
   document.getElementById("role3").innerText = "서버구현";

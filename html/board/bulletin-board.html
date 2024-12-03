@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/bulletin-board.css">
+
+    <title>전체게시판</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 사이드바 -->
+        <dynamic-sidebar></dynamic-sidebar>
+
+        <!-- 메인 컨텐츠 -->
+        <div class="main-container">
+            <!--헤더:로고-->
+            <header>
+                <img src="../images/logo.png" alt="로고" class="logo-image" onclick="location.href='../main/main.html'">
+            </header>
+            <!--메인nav-->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../main/introduce.html">다채로와란?</a></li>
+                    <li><a href="#">서비스 소개</a></li>
+                    <li><a href="../board/bulletin-board.html" style="text-decoration: underline;">전체게시판</a></li>
+                    <li><a href="../student/quiz.html">퀴즈나라</a></li>
+                </ul>
+            </nav>
+            <main class="main-content">
+                <div class="content-container">
+                    <div class="board-header">
+                        <div class="board-name">전체게시판</div>
+                        <div class="board-search">
+                            <input type="text" id="search-input" placeholder="검색어 입력">
+                            <button class="search-button">검색</button>
+                            <button class="write-button" id="write-button"
+                                onclick="location.href='../board/board-write.html'">글쓰기</button>
+                        </div>
+
+                    </div>
+                    <table class="board-table">
+                        <thead>
+                            <tr>
+                                <th>제목</th>
+                                <th>만든 날짜</th>
+                                <th>작성자</th>
+                                <th>카테고리</th>
+                            </tr>
+                        </thead>
+                        <tbody id="board-content">
+                            <!-- 게시글 데이터가 여기에 추가됩니다 -->
+                        </tbody>
+                    </table>
+                    <div class="pagination" id="pagination">
+                        <!-- 페이징 버튼이 여기에 추가됩니다 -->
+                    </div>
+                </div>
+            </main>
+        </div>
+
+    </div>
+    <script type="module" src="../../js/dynamic-sidebar.js"></script>
+    <script type="text/javascript" src="../../js/bulletin-board.js"></script>
+</body>
+
+</html>
