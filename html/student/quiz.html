@@ -1,0 +1,57 @@
+<!--학생 GPT 퀴즈-->
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/student_quiz.css">
+    <title>한국어 퀴즈</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 사이드바 -->
+        <dynamic-sidebar></dynamic-sidebar>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="main-content">
+            <section class="quiz-contents">
+                <h2 class="top-title">한국어 퀴즈</h2>
+                <div class="progress-box">
+                    <p id="progress-text">0 / 5</p>
+                </div>
+                <nav class="quiz-theme">
+                    <div class="question-box current">
+
+                    </div>
+                    <div class="answer-box">
+
+                    </div>
+                </nav>
+            </section>
+        </main>
+    </div>
+    <!-- 채점 결과 팝업 -->
+    <div id="result-popup" class="popup">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <p id="result-message"></p>
+            <div class="btn-container">
+                <button class="reanswer-btn" id="reanswer-btn">다시 풀어보기</button>
+                <button class="next-btn">다음으로</button>
+            </div>
+
+            <div class="rate-container">
+                <p>방금 푼 퀴즈를 평가해주세요</p>
+                <button onclick="rateQuiz('like')" class="rate-btn like-btn" onclick="rateQuiz('like')">좋아요 👍</button>
+                <button onclick="rateQuiz('dislike')" class="rate-btn dislike-btn" onclick="rateQuiz('dislike')">싫어요
+                    👎</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="../../js/dynamic-sidebar.js"></script>
+    <script src="../../js/student_quiz.js"></script>
+</body>
+
+</html>

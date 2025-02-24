@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+}
+
+.container {
+    width: 97.5vw;
+    height: 94vh;
+    display: flex;
+    padding: 2.5vh 1vw;
+}
+/* 메인 컨텐츠 스타일 */
+.main-content {
+    width: 80%;
+    height: 110vh;
+    flex-grow: 1;
+    padding: 10px;
+    padding-bottom: 0;
+    border-radius: 0px 30px 0px 0px;
+    background-color: #fff;
+}
+
+/* 상단 레이아웃을 한 줄로 배치 */
+.top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5vh 2vw;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* 강의 제목 스타일 */
+#lecture-title {
+    width: 30vh;
+    border-radius: 20px;
+    text-align: center;
+    background-color: #ffd700;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+.top-detail{
+    display: inline-block;
+}
+/* 일지출력 버튼 */
+#daily-report{
+    display: inline-block;
+    border: none;
+    background-color: #f44336;
+    color: white;
+    padding: 1.2vh 1.8vw;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: medium;
+    text-align: center;
+    min-width: 100px;
+    cursor: pointer;
+}
+#daily-report:hover{
+    background-color: #d44336;
+}
+/* 진행률 스타일 */
+#progress-rate {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 0.8vh 1.5vw;
+    border-radius: 20px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 100px;
+}
+
+.lecture-contents {
+    padding: 15px;
+    border: 1px solid #333;
+    border-radius: 20px;
+    background-color: #fff;
+    margin-bottom: 10px;
+}
+
+/* 아코디언 스타일 */
+.accordion {
+    margin-top: 20px;
+}
+
+.accordion-item {
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.accordion-header {
+    background-color: #f1f1f1;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    border: none;
+    text-align: left;
+    font-size: 1rem;
+}
+
+.accordion-body {
+    display: none;
+    padding: 20px;
+    background-color: #fafafa;
+}
+
+.accordion-body.show {
+    display: block;
+}
+.lecture-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+.lecture-content video,
+.lecture-content a {
+    display: block;
+    width: 70%;
+    min-width: 400px;
+    margin-top: 10px;
+}
+.button-container{
+    display: flex;
+}
+.finish-btn {
+    width: 100px;
+    margin-top: 10px;
+    margin-left: auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

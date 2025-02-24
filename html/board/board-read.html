@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <link rel="stylesheet" href="../../css/board-read.css">
+
+    <title>글보기</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 사이드바 -->
+        <dynamic-sidebar></dynamic-sidebar>
+
+        <!-- 메인 컨텐츠 -->
+        <div class="main-container">
+            <!--헤더:로고-->
+            <header>
+                <img src="../images/logo.png" alt="로고" class="logo-image">
+            </header>
+            <!--메인nav-->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../main/introduce.html">다채로와란?</a></li>
+                    <li><a href="#">서비스 소개</a></li>
+                    <li><a href="../board/bulletin-board.html" style="text-decoration: underline;">전체게시판</a></li>
+                    <li><a href="../student/quiz.html">퀴즈나라</a></li>
+                </ul>
+            </nav>
+            <!--모달창-->
+            <main class="main-content">
+                <div class="content-container">
+                    <div class="board-name">게시글 보기</div>
+
+                    <form class="input-form">
+                        <div class="form-top">
+                            <div class="form-group1">
+                                <label for="title" id="label-title">제목</label><br>
+                                <input type="text" class="title" id="title" readonly>
+                            </div>
+                            <div class="form-group2">
+                                <label for="title" id="label-category">카테고리</label><br>
+                                <input type="text" id="category" class="category" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group3">
+                            <!-- 글 내용 -->
+                            <label for="content" id="label-content">내용</label><br>
+                            <textarea id="content" class="content-area" rows="10" readonly></textarea>
+
+                            <!-- 첨부파일 -->
+                            <div class="file-upload">
+                                <label for="file-upload" id="file-label">첨부 파일</label>
+                                <div id="file-list" class="file-list">
+                                    <p>첨부된 파일이 여기에 표시됩니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 수정하기 버튼 -->
+                        <div class="form-group4">
+                            <button id="edit-button" class="btn-primary hidden" onclick="
+                                location.href='../board/board-write.html'">수정하기</button>
+                            <button id="delete-button" class="btn-primary hidden">삭제</button>
+                        </div>
+
+                        <div id="comment-section">
+                            <h3>댓글</h3>
+                            <div id="comment-list" class="comment-list"></div>
+                            <div id="comment-form" class="comment-form">
+                                <textarea id="comment-input" placeholder="댓글을 입력하세요"></textarea>
+                                <button id="comment-submit">댓글 등록</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </main>
+
+        </div>
+
+    </div>
+    <script type="module" src="../../js/dynamic-sidebar.js"></script>
+    <script type="text/javascript" src="../../js/board-read.js"></script>
+</body>
+
+</html>

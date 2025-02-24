@@ -1,0 +1,154 @@
+<style>
+    /* 사이드바 스타일 */
+    .sidebar {
+        width: 18vw;
+        height: 60vh;
+        background-color: #ffffff;
+        border-right: 1px solid #ddd;
+        border-radius: 30px 0 0 30px;
+    }
+
+    .profile {
+        width: 60%;
+        text-align: center;
+        margin: 10%;
+        padding: 10%;
+        background-color: #ddd;
+        border-radius: 30px;
+    }
+
+    .profile-image {
+        width: 8vw;
+        height: 8.3vw;
+        border-radius: 50%;
+        margin-bottom: 2vh;
+        background-color: #ffffff;
+    }
+
+    .username {
+        font-weight: bold;
+        margin-bottom: 3px;
+    }
+
+    .location {
+        color: gray;
+    }
+
+    .nav {
+        width: 60%;
+        margin: 10%;
+        padding-left: 10%;
+    }
+
+    .nav ul {
+        width: 100%;
+        list-style: none;
+        padding: 0;
+    }
+
+    .nav ul.basic-menu li {
+        margin-bottom: 1.5vh;
+    }
+
+    .nav ul.basic-menu hr {
+        margin-top: 3vh;
+        margin-bottom: 3vh;
+    }
+
+    .sub-menu {
+        margin-left: 10%;
+        margin-top: 10%;
+        display: none;
+        /* 변경된 부분 */
+    }
+
+    .sub-menu li a {
+        margin-bottom: 1vh;
+    }
+
+    .nav ul li a {
+        text-decoration: none;
+        color: #333;
+    }
+</style>
+<aside class="sidebar">
+    <div class="profile">
+        <img src="../images/book_puppy.png" alt="프로필 사진" class="profile-image" id="profile-image">
+        <p class="username" id="username">사용자 이름</p>
+        <p class="location" id="location">지역 정보</p>
+    </div>
+    <nav class="nav">
+        <ul class="basic-menu">
+            <li><a href="../main/main.html">메인페이지</a></li>
+            <li><a href="../account/profile.html">프로필 관리</a></li>
+            <li><a href="#">알림관리</a></li>
+            <hr>
+        </ul>
+        <ul class="role-menu">
+            <li class="active" onclick="click_role_menu()" id="role-menu-title">역할별 메뉴</li>
+            <ul class="sub-menu" id="role-sub-menu"></ul>
+        </ul>
+    </nav>
+</aside>
+
+<script>
+    // 사이드바 정보를 동적으로 설정
+    function loadSidebarData() {
+        const usernameElement = document.getElementById("username");
+        const locationElement = document.getElementById("location");
+        const roleMenuTitle = document.getElementById("role-menu-title");
+        const roleSubMenu = document.getElementById("role-sub-menu");
+
+        const userRole = localStorage.getItem("userRole"); // 사용자 역할
+        const username = localStorage.getItem("username"); // 사용자 이름
+        const location = localStorage.getItem("location"); // 사용자 위치 정보
+
+        if (username) {
+            usernameElement.innerText = username;
+        }
+        if (location) {
+            locationElement.innerText = location;
+        }
+
+        // 역할에 따라 메뉴 항목 설정
+        if (userRole === "teacher") {
+            roleMenuTitle.innerText = "강의 및 학생관리";
+            roleSubMenu.innerHTML = `
+                <li><a href="../teacher/course.html">강의 계획서 관리</a></li>
+                <li><a href="../teacher/contents.html">강의 컨텐츠 관리</a></li>
+                <li><a href="../teacher/student-management.html">학생관리</a></li>
+            `;
+        } else if (userRole === "student") {
+            roleMenuTitle.innerText = "학습";
+            roleSubMenu.innerHTML = `
+                <li><a href="../student/contents.html">강의 컨텐츠 학습</a></li>
+                <li><a href="../student/quiz.html">AI퀴즈</a></li>
+            `;
+        } else if (userRole === "manager") {
+            usernameElement.innerText = "관리자 로그인";
+            locationElement.style.display = "none";
+            roleMenuTitle.innerText = "회원 관리";
+            roleSubMenu.innerHTML = `
+                <li><a href="../manager/user-management.html">회원 관리</a></li>
+            `;
+        }
+    }
+
+    // 역할별 메뉴 클릭 시 서브메뉴 표시/숨김
+    function click_role_menu() {
+        const subMenu = document.getElementById("role-sub-menu");
+        const roleMenuTitle = document.getElementById("role-menu-title");
+
+        // display 속성을 사용하여 보이기/숨기기
+        if (getComputedStyle(subMenu).display === "none") {
+            subMenu.style.display = "block";
+            roleMenuTitle.style.fontWeight = "bolder";
+        } else {
+            subMenu.style.display = "none";
+            roleMenuTitle.style.fontWeight = "normal";
+        }
+    }
+
+    // 호출하여 사용자 정보를 표시
+    document.addEventListener("DOMContentLoaded", loadSidebarData);
+</script>

@@ -6,23 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../css/student-management.css">
     <title>학생 관리</title>
-    <script>
-        function loadSidebar(){
-            fetch('../teacher/teacher-sidebar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementsByClassName('sidebar')[0].innerHTML=data;
-                })
-        }
-        window.onload = loadSidebar;
-    </script>
 </head>
 
 <body>
     <div class="container">
         <!-- 사이드바 -->
-        <aside class="sidebar">
-        </aside>
+        <dynamic-sidebar></dynamic-sidebar>
         <!-- 메인 컨텐츠 -->
         <main class="main-content">
             <!-- 학생 목록 -->
@@ -59,10 +48,16 @@
                     </div>
                 </form>
             </section>
-            
         </main>
     </div>
+    <script type="module" src="../../js/dynamic-sidebar.js"></script>
     <script src="../../js/student-management.js"></script>
+    <script>
+        document.getElementById('student-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // 기본 제출 방지
+            // 여기에 학생 등록 로직 추가
+        });
+    </script>
 </body>
 
 </html>

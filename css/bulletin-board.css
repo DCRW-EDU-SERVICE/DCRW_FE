@@ -1,0 +1,350 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+  }
+
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+
+    
+}
+
+.container {
+    width:97.5vw;
+    height:94vh;
+    display: flex;
+    padding-top:2.5vh;
+    padding-bottom:2.5vh;
+    padding-left:1vw;
+    padding-right:1vw;
+
+
+}
+
+/* 사이드바 스타일 */
+.sidebar {
+    width: 18vw;
+    height: 95vh;
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
+    border-radius: 30px 0 0 30px;
+}
+
+.profile {
+    width: 60%;
+    text-align: center;
+    margin: 10%;
+    padding: 10%;
+    background-color: #ddd;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-image {
+    width: 8vw;
+    height: 8.3vw;
+    border-radius: 50%;
+    margin-bottom: 2vh;
+    background-color: #ffffff;
+}
+
+.username {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.location {
+    width:5vw;
+    color: #003676;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.nav{
+    width: 60%;
+    margin:10%; 
+    padding-left:10%;   
+}
+
+.nav ul {
+    width: 100%;
+    list-style: none;
+    padding:0;
+    
+}
+.nav ul.basic-menu li{
+    margin-bottom: 1.5vh;
+    
+}
+.nav ul.basic-menu hr {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+
+}
+
+.sub-menu{
+    margin-left: 10%;
+    margin-top: 10%;
+    visibility: hidden;
+}
+.sub-menu li a {
+    margin-bottom: 1vh;
+}
+
+.nav ul li a {
+
+    text-decoration: none;
+    color: #333;
+    
+}
+.main-container{
+    width: 80vw;
+    height: 95vh;
+    border-radius: 0px 30px 30px 0px;
+}
+/*헤더:로고*/
+header {
+    width: 100%;
+    height:10%;
+    border-radius: 0px 30px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;  
+    background-color: #ffffff;
+}
+.logo-image{
+    width: 11vw;
+    height:7.5vh;
+
+}
+/*메인:메뉴바*/
+.main-nav{
+    width: 100%;
+    height: 6%;
+    display: flex;
+    justify-content: start;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background-color: #ffffff;
+}
+.main-nav ul {
+    width: 50%;
+    height:100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;  
+    list-style-type: none;
+    
+}
+.main-nav ul li:hover{
+    text-decoration: underline;
+}
+.main-nav ul li a {
+    text-decoration: none;
+    color:#333
+}
+/* 메인 컨텐츠 스타일 */
+.main-content {
+    width: 100%;
+    height: 84%;
+    background-color:#008cdb;
+    border-radius: 0px 0px 30px 0px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;  
+}
+.content-container{
+    width:90%;
+    height:95%;
+    padding: 5px;
+    background-color: white;
+    border-radius: 10px;
+    margin: 0 auto; /* 중앙 정렬 */
+    overflow-x: auto; /* 가로 스크롤 추가 */
+    box-sizing: border-box;
+}
+.board-name{
+    width:10vw;
+    height: 6vh;
+    border-radius: 50%;
+    border: 3px solid black;
+    background-color: #FFC500 ;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: bolder;
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.board-header h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.board-search {
+    display: flex;
+    align-items: center;
+}
+
+.search-button,
+.write-button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.search-button:hover,
+.write-button:hover {
+    background-color: #0056b3;
+}
+.write-button{
+    margin-left:20px;
+    margin-right:20px;
+}
+.board-header .search-button {
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.search-button {
+    background-color: yellowgreen;
+    border: none;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.board-header #search-input {
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: 5px;
+    width: 200px;
+    font-size: 14px;
+    border: none;
+    background-color: #f1f1f1;
+    border-radius: 10px 0px 0px 10px;
+}
+
+.board-table {
+    width: 100%; /* content-container 크기에 맞게 테이블 크기 조정 */
+    border-collapse: collapse; 
+}
+/* <a> 태그 스타일 제거 */
+.board-table a {
+    text-decoration: none;
+    color: inherit; /* 부모 요소의 색상 상속 */
+    font-weight: normal; /* 글씨체 기본 설정 */
+  }
+  
+  /* 공지사항 스타일 */
+  .board-table .notice a {
+    color: red; /* 빨간색 */
+    font-weight: bold; /* 글씨 굵게 */
+  }
+  
+.board-table th,
+.board-table td {
+    border: none;
+    padding: 8px;
+    text-align: left;
+    word-wrap: break-word; /* 긴 텍스트 줄바꿈 처리 */
+}
+
+/* 행 구분선만 추가 */
+.board-table tr {
+    border-bottom: 1px solid #ddd; /* 각 행의 아래쪽에만 선 추가 */
+}
+
+/* 마지막 행 구분선 제거 */
+.board-table tr:last-child {
+    border-bottom: none;
+}
+
+.notice {
+    background-color: #fff4f4; /* 연한 빨간 배경 */
+}
+
+.board-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+
+.board-table tbody tr:hover {
+    background-color: #f0f8ff;
+}
+
+.notice-title {
+    color: red;
+    font-weight: bold;
+}
+
+
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    background-color: #fff;
+}
+
+.pagination button.active {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 5px;
+}
+
+.pagination-button,
+button {
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination-button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination button:hover {
+    background-color: #0056b3;
+    color: white;
+}

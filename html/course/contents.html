@@ -5,32 +5,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/teacher_contents.css">
+    <link rel="stylesheet" href="../../css/course_contents.css">
     <title>강의 컨텐츠 조회</title>
-    <script>
-        function loadSidebar(){
-            fetch('../teacher/teacher-sidebar.html')
-                .then(response => response.text())
-                .then(data => {
-                    document.getElementsByClassName('sidebar')[0].innerHTML=data;
-                })
-        }
-        window.onload = loadSidebar;
-    </script>
 </head>
 
 <body>
     <div class="container">
         <!-- 사이드바 -->
-        <aside class="sidebar">
-            
-        </aside>
-        
+        <dynamic-sidebar></dynamic-sidebar>
+
         <!-- 메인 컨텐츠 -->
         <main class="main-content">
             <div class="top">
-                <h2 id="lecture-title"></h2>
-                <div id="progress-rate"></div>
+                <h2 id="lecture-title">김지현 학생의 강의</h2>
+                <div class="top-detail">
+                    <button id="daily-report">일지출력</button>
+                    <div id="progress-rate"></div>
+                </div>
             </div>
             <section class="lecture-contents">
                 <h2>강의 컨텐츠</h2>
@@ -40,7 +31,8 @@
             </section>
         </main>
     </div>
-    <script src="../../js/teacher_contents.js"></script>
+    <script type="module" src="../../js/dynamic-sidebar.js"></script>
+    <script src="../../js/course_contents.js"></script>
 </body>
 
 </html>

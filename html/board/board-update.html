@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token }}">
+    <link rel="stylesheet" href="../../css/board-write.css">
+
+    <title>글쓰기</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- 사이드바 -->
+        <dynamic-sidebar></dynamic-sidebar>
+        <!-- 메인 컨텐츠 -->
+        <div class="main-container">
+            <!--헤더:로고-->
+            <header>
+                <img src="../images/logo.png" alt="로고" class="logo-image" onclick="location.href='../main/main.html'">
+            </header>
+            <!--메인nav-->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="../main/introduce.html">다채로와란?</a></li>
+                    <li><a href="#">서비스 소개</a></li>
+                    <li><a href="../board/bulletin-board.html">전체게시판</a></li>
+                    <li><a href="../student/quiz.html">퀴즈나라</a></li>
+                </ul>
+            </nav>
+            <!--모달창-->
+            <main class="main-content">
+                <div class="content-container">
+                    <div class="board-name">글쓰기</div>
+                    <form class="input-form">
+                        <div class="form-top">
+                            <div class="form-group1">
+                                <label for="title" id="label-title">제목</label><br>
+                                <input type="text" class="title" placeholder="제목을 입력하세요" id="title">
+                            </div>
+                            <div class="form-group2">
+                                <label for="title" id="label-category">카테고리</label><br>
+                                <select name="category" id="category">
+                                    <option value="1">공지사항</option>
+                                    <option value="2">오류신고</option>
+                                    <option value="3">자료공유</option>
+                                    <option value="4">자유글</option>
+                                    <option value="5">QnA</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group3">
+                            <!-- 글작성 텍스트박스 -->
+                            <label for="content" id="label-content">내용</label><br>
+                            <textarea id="content" class="content-area" rows="10" placeholder="내용을 입력하세요"></textarea>
+
+                            <!-- 파일 첨부 -->
+                            <div class="file-upload">
+                                <label for="file-upload" id="file-label">파일 첨부</label>
+                                <input type="file" id="file-upload" accept=".pdf,.doc,.docx,.txt,.xlsx,.zip" multiple>
+                                <div id="file-list" class="file-list">
+                                    <p>첨부된 파일이 여기에 표시됩니다.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group4">
+                            <img src="../images/logo.png" class="under-logo">
+                            <div class="btn-container">
+                                <button id="btn-save" class="btn-primary">저장</button>
+                                <button id="btn-undo" class="btn-primary" onclick="history.back()">취소</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+
+    </div>
+    <script type="module" src="../../js/dynamic-sidebar.js"></script>
+    <script type="text/javascript" src="../../js/board-update.js"></script>
+</body>
+
+</html>
